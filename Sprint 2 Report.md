@@ -29,7 +29,7 @@ TODO - Add all Sprint 2 issues, use Markdown to add link text later
 There were no issues assigned to this sprint that remain incomplete. 
 
 ## Code Files for Review
-No code files were generated for this sprint. Please see the Work Summary section for more explanation. 
+The only notable work involving code is most easily reviewable by examining the commit at which the work was done to change a small element of the StochPy sourcecode to stop a welcome banner from being displayed. URL AND TITLE HERE 
  
 ## Retrospective Summary
 Here's what went well:
