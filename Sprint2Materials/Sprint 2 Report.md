@@ -14,15 +14,15 @@ All issues designated for Sprint 2 have been completed. However, in terms of the
 The vast majority of issues completed were administrative in nature, largely involving uploading documentation and other background materials. As such, we felt that including before-and-after videos for these issues would be redundant, as the changes are self-evident by nature of new files being added to the repository. We plan on creating such videos for significant feature additions, such as comparing before-and-after runtimes for comparing stochastic simulation performance. 
 
 Still, here are links to the issues that we completed in this sprint:
-*[Complete Testing and Acceptance Plans Section](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/19)
-*[Submit Testing and Acceptance Plans Documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/23)
-*[Remove welcome banner displayed on STochPy startup](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/33)
-*[Meet to Whiteboard and study the StochPy library](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/22)
-*[Update Project Description Document to Include testing and Acceptance Plans](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/24)
-*[Upload Meeting Five Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/20)
-*[Prepare Sprint 2 Documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/32)
-*[Upload Meeting Six Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/27)
-*[Upload 11/4 Client Meeting Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/28)
+* [Complete Testing and Acceptance Plans Section](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/19)
+* [Submit Testing and Acceptance Plans Documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/23)
+* [Remove welcome banner displayed on STochPy startup](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/33)
+* [Meet to Whiteboard and study the StochPy library](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/22)
+* [Update Project Description Document to Include testing and Acceptance Plans](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/24)
+* [Upload Meeting Five Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/20)
+* [Prepare Sprint 2 Documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/32)
+* [Upload Meeting Six Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/27)
+* [Upload 11/4 Client Meeting Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/28)
 
  ## Incomplete Issues
 There were no issues assigned to this sprint that remain incomplete. 
