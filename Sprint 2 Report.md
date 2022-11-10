@@ -1,21 +1,20 @@
-# Sprint 1 Report (8/26/2022 - 10/9/2022)
+# Sprint 2 Report (10/10/2022 - 11/9/2022)
 
 ## What's New
- * StochPy source code uploaded
- * Readme, report, and other project documentation uploaded
+ * Testing and Acceptance Plans section of project documentation added
  * No new transformative user-facing features at this time
 
 ## Work Summary
-For Sprint 1, our main efforts were generally focused around administrative tasks and gaining a greater understanding of the StochPy codebase we will be working with for the next several months. By nature of our project being centered around working around a preexisting research codebase, we have spent most of our development time gaining background knowledge on stochastic simulations, understanding academic papers and other sources provided by our sponsor Dr. Lofgren, reading the documentation of StochPy and other libraries to gain additional background knowledge, and so on. Additionally, setting up our GitHub operations and getting accustomed to all needed features played a major role in this sprint. 
+For Sprint 2, our main efforts were generally focused around administrative tasks and gaining a greater understanding of the StochPy codebase we will be working with for the next several months. By nature of our project being centered around working around a preexisting research codebase, we have spent most of our development time gaining background knowledge on stochastic simulations, understanding academic papers and other sources provided by our sponsor Dr. Lofgren, reading the documentation of StochPy and other libraries to gain additional background knowledge, and so on. Additionally, we have made sure to keep our github repository up to date with our progress.
 
 ## Unfinished Work
-All issues designated for Sprint 1 have been completed. However, in terms of the overall work needed for this project, we still need to work towards implementing the actual stochastic simulation functions, though we are formulating a rigorous plan for this. 
+All issues designated for Sprint 2 have been completed. However, in terms of the overall work needed for this project, we still need to work towards implementing the actual stochastic simulation functions, though we are formulating a rigorous plan for this. 
 
 ## Completed Issues
-All issues completed were administrative in nature, largely involving organizing the repository and uploading documentation and other background materials. As such, we felt that including before-and-after videos for these issues would be redundant, as the changes are self-evident by nature of new files being added to the repository. We plan on creating such videos for significant feature additions, such as comparing before-and-after runtimes for comparing stochastic simulation performance. 
+The vast majority of issues completed were administrative in nature, largely involving uploading documentation and other background materials. As such, we felt that including before-and-after videos for these issues would be redundant, as the changes are self-evident by nature of new files being added to the repository. We plan on creating such videos for significant feature additions, such as comparing before-and-after runtimes for comparing stochastic simulation performance. 
 
 Still, here are links to the issues that we completed in this sprint:
-TODO - Add all Sprint 1 issues, use Markdown to add link text later
+TODO - Add all Sprint 2 issues, use Markdown to add link text later
  * [Upload team inventory](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/1)
  * [Upload Solution Approach version of project report](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/2)
  * [Upload Sprint 1 report template](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/3)
