@@ -268,23 +268,23 @@ DeletePreviousOutput(temp_dir,'temp_parse_module')
 DeleteExistingData(temp_dir)
 #readline.clear_history()
 
-print("""
-#######################################################################
-#                                                                     #
-#            Welcome to the interactive StochPy environment           #
-#                                                                     #
-#######################################################################
-#  StochPy: Stochastic modeling in Python                             #
-#  http://stochpy.sourceforge.net                                     #
-#  Copyright(C) T.R Maarleveld, B.G. Olivier, F.J Bruggeman 2010-2015 #
-#  DOI: 10.1371/journal.pone.0079345                                  #
-#  Email: tmd200@users.sourceforge.net                                #
-#  VU University, Amsterdam, Netherlands                              #
-#  Centrum Wiskunde Informatica, Amsterdam, Netherlands               #
-#  StochPy is distributed under the BSD licence.                      #
-#######################################################################
-""")
-print("Version {0:s}".format(__version__) )
+# print("""
+# #######################################################################
+# #                                                                     #
+# #            Welcome to the interactive StochPy environment           #
+# #                                                                     #
+# #######################################################################
+# #  StochPy: Stochastic modeling in Python                             #
+# #  http://stochpy.sourceforge.net                                     #
+# #  Copyright(C) T.R Maarleveld, B.G. Olivier, F.J Bruggeman 2010-2015 #
+# #  DOI: 10.1371/journal.pone.0079345                                  #
+# #  Email: tmd200@users.sourceforge.net                                #
+# #  VU University, Amsterdam, Netherlands                              #
+# #  Centrum Wiskunde Informatica, Amsterdam, Netherlands               #
+# #  StochPy is distributed under the BSD licence.                      #
+# #######################################################################
+# """)
+# print("Version {0:s}".format(__version__) )
 print("Output Directory: {0:s}".format(output_dir) )
 print("Model Directory: {0:s}".format(model_dir) )
 #print("Warning: Figure freezing? Try a different matplotlib backend (stochpy.plt.switch_backend) and/or set IsInteractive to False (see user guide)")
