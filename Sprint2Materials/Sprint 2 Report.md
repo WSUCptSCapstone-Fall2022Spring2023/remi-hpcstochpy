@@ -24,6 +24,7 @@ Still, here are links to the issues that we completed in this sprint:
 * [Prepare Sprint 2 Documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/32)
 * [Upload Meeting Six Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/27)
 * [Upload 11/4 Client Meeting Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/28)
+* [Update Sprint 2 documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/37)
 
  ## Incomplete Issues
 There were no issues assigned to this sprint that remain incomplete. 
