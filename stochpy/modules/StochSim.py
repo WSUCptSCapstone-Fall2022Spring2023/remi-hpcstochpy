@@ -14,6 +14,7 @@ from __future__ import division, print_function, absolute_import
 
 import sys, copy, time, os, subprocess, math, shutil, numba
 from io import BytesIO
+import numpy
 from numba import jit
 
 try:
@@ -650,8 +651,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self._IsSimulationDone = True
                 if not quiet: print("Info: Data successfully parsed into StochPy")
 
-    @jit(nopython=True)
-    def DoStochSim(self,end=False,mode=False,method=False,trajectories=False,epsilon = 0.03,IsTrackPropensities=False, rate_selection = None, species_selection = None,IsOnlyLastTimepoint = False,critical_reactions=[],reaction_orders = False,species_HORs = False,species_max_influence = False,quiet = False):
+    def DoStochSim(self,end=False,mode=False,method=False,trajectories=False,epsilon = 0.03,IsTrackPropensities=False, rate_selection = None, species_selection = None,IsOnlyLastTimepoint = False,critical_reactions=[],reaction_orders = False,species_HORs = False,species_max_influence = False,quiet = False, use_jit = False):
         """
         Run a stochastic simulation for until `end` is reached. This can be either time steps or end time (which could be a *HUGE* number of steps).
 
@@ -764,12 +764,20 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self.settings = SSASettings(x_matrix=self.SSA.X_matrixinit,timesteps=self.sim_end,starttime=0,endtime=10**50, track_propensities=self._IsTrackPropensities, species_selection=species_selection,rate_selection = rate_selection,last_timepoint=IsOnlyLastTimepoint,seed = self._IsSeed,quiet = quiet)               
             else:
                 print("*** WARNING ***: Simulation mode should be 'time' or 'steps'. Steps is done by default")
-                self.settings = SSASettings(x_matrix=self.SSA.X_matrixinit,timesteps=self.sim_end,starttime=0,endtime=10**50, track_propensities=self._IsTrackPropensities, species_selection=species_selection,rate_selection = rate_selection,last_timepoint=IsOnlyLastTimepoint,seed = self._IsSeed,quiet = quiet) 
-                
-            if self.sim_method_name.lower() == "tauleaping":    
-                self.SSA.Execute(self.settings,IsStatusBar,epsilon,critical_reactions)
+                self.settings = SSASettings(x_matrix=self.SSA.X_matrixinit,timesteps=self.sim_end,starttime=0,endtime=10**50, track_propensities=self._IsTrackPropensities, species_selection=species_selection,rate_selection = rate_selection,last_timepoint=IsOnlyLastTimepoint,seed = self._IsSeed,quiet = quiet)
+
+            # Computationally expensive block. Calls Execute() in DirectMethod.py
+            if use_jit:
+                if self.sim_method_name.lower() == "tauleaping":
+                    self.SSA.jit_execute(self.settings, IsStatusBar, epsilon, critical_reactions)
+                else:
+                    self.SSA.jit_execute(self.settings, IsStatusBar)
             else:
-                self.SSA.Execute(self.settings,IsStatusBar)
+                if self.sim_method_name.lower() == "tauleaping":
+                    self.SSA.Execute(self.settings, IsStatusBar, epsilon, critical_reactions)
+                else:
+                    self.SSA.Execute(self.settings, IsStatusBar)
+            # End computationally expensive block
 
             self.data_stochsim = IntegrationStochasticDataObj()         
                   
@@ -794,8 +802,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
         else:
             self.simulation_time = progressBar.end_time - progressBar.t1            
         if IsOnlyLastTimepoint and not quiet: 
-            print('Info: not enough data points (are stored) to determine statistics.')        
-            
+            print('Info: not enough data points (are stored) to determine statistics.')
 
     def SetDelayParameters(self, delay_distributions, nonconsuming_reactions = None):
         """       
