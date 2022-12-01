@@ -12,8 +12,9 @@ Last Change: Augustus 10, 2015
 ############################ IMPORTS ################################
 from __future__ import division, print_function, absolute_import
 
-import sys,copy,time,os,subprocess, math,shutil
-from io import BytesIO   
+import sys, copy, time, os, subprocess, math, shutil, numba
+from io import BytesIO
+from numba import jit
 
 try:
     import pickle
@@ -648,8 +649,8 @@ class SSA(PlottingFunctions,PrintingFunctions):
                     self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names)
                 self._IsSimulationDone = True
                 if not quiet: print("Info: Data successfully parsed into StochPy")
-    
 
+    @jit(nopython=True)
     def DoStochSim(self,end=False,mode=False,method=False,trajectories=False,epsilon = 0.03,IsTrackPropensities=False, rate_selection = None, species_selection = None,IsOnlyLastTimepoint = False,critical_reactions=[],reaction_orders = False,species_HORs = False,species_max_influence = False,quiet = False):
         """
         Run a stochastic simulation for until `end` is reached. This can be either time steps or end time (which could be a *HUGE* number of steps).
@@ -1517,7 +1518,8 @@ class SSA(PlottingFunctions,PrintingFunctions):
             if not self.data_stochsim_grid.HAS_PROPENSITIES_AUTOCOVARIANCES:
                 print("*** WARNING ***: Autocovariances are not yet calculated. StochPy automatically calculates autocovariances with pre-defined settings. You can use GetPropensitiesAutocovariances(rates=True,n_samples=51)")
                 self.GetPropensitiesAutocovariances(rates = rates2plot,n_samples=self.data_stochsim.simulation_endtime)
-            
+                self.GetPropensitiesAutocovariances(rates = rates2plot,n_samples=self.data_stochsim.simulation_endtime)
+
             for n in range(1,self.sim_trajectories_done+1): 
                 if self.sim_trajectories_done > 1:
                     self.GetTrajectoryData(n)
