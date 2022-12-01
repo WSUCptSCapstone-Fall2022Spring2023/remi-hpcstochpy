@@ -25,4 +25,4 @@ class SBML2PSC():
        - *pscfile*: [default = None] the output PSC file name (if None *sbmlfile*.psc is used)
        - *pscdir*: [default = None] the PSC output directory (if None the pysces.model_dir is used)
       """      
-      PyscesInterfaces.Core2interfaces().convertSBML2PSC(sbmlfile,sbmldir,pscfile,pscdir, netStoich=True,quiet=quiet)
+      PyscesInterfaces.Core2interfaces().convertSBML2PSC(sbmlfile, sbmldir, pscfile, pscdir, netStoich=True, quiet=quiet)

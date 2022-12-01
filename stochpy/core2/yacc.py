@@ -61,7 +61,7 @@
 
 from __future__ import division, print_function, absolute_import
 
-from stochpy import model_dir, output_dir
+from stochpy import output_dir
 
 __version__    = "3.3"
 __tabversion__ = "3.2"       # Table version
@@ -88,7 +88,7 @@ resultlimit = 40               # Size limit of results when running in debug mod
 
 pickle_protocol = 0            # Protocol to use when writing pickle files
 
-import re, types, sys, os.path
+import types, sys, os.path
 
 # Compatibility function for python 2.6/3.0
 if sys.version_info[0] < 3:

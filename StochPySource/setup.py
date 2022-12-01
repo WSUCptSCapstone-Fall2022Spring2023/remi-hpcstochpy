@@ -25,7 +25,7 @@ local_path = os.path.dirname(os.path.abspath(os.sys.argv[0]))		# Get the dir of 
 os.chdir(local_path)
 
 mydata_files = []
-modfold = os.path.join(local_path, 'stochpy', 'pscmodels')
+modfold = os.path.join(local_path, '../stochpy', 'pscmodels')
 mods = os.listdir(modfold)
 
 mypackages = ['stochpy','stochpy.lib','stochpy.modules','stochpy.pscmodels','stochpy.implementations','stochpy.core2','stochpy.tools']		# My subpackage list

@@ -11,7 +11,7 @@ Last Change: August 06, 2015
 
 from __future__ import division, print_function, absolute_import
 
-import os,copy,time,sys,operator,re
+import os,copy, sys, re
 try:
     import numpy as np
 except ImportError:
@@ -275,7 +275,7 @@ class PyscesInputFileParser(object):
             #try:
             if not quiet:
                 print("Info: extension is .xml")
-            SBML2PSC.SBML2PSC(self.ModelFile,self.ModelDir,quiet=quiet)
+            SBML2PSC.SBML2PSC(self.ModelFile, self.ModelDir, quiet=quiet)
             if not quiet:
                 print("Info: SBML data is converted into psc data and is stored at: {0:s}".format(model_dir))
             self.ModelFile += '.psc'

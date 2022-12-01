@@ -46,7 +46,7 @@ class PlottingFunctions():
         Analysis.plt.figure(self.StochSim.plot.plotnum)    
 
         # make a grid for plotting
-        gs = Analysis.gridspec.GridSpec(1, 3,width_ratios=[0.333,1,0.33333],height_ratios=[1])
+        gs = Analysis.gridspec.GridSpec(1, 3, width_ratios=[0.333, 1, 0.33333], height_ratios=[1])
         ax1 = Analysis.plt.subplot(gs[2])  
 
         sample_ = copy.copy(sample)
@@ -59,7 +59,7 @@ class PlottingFunctions():
         Analysis.plt.yticks([])
 
         max_y = np.ceil(max(self.data_stochsim_celldivision.species_at_division[:,species_index]))
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.ylim([0, max_y])
         
         ax2 =  Analysis.plt.subplot(gs[0]) 
 
@@ -69,7 +69,7 @@ class PlottingFunctions():
         self.StochSim.plot.plotnum -= 1
         self.PlotSpeciesAtBirthDistributions(sample=sample,species2plot=species2plot,orientation='horizontal',title=r'$n_{a,%s}$' % sample,IsLegend=False,colors='#56B3E9',multiplotting=True)
 
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.ylim([0, max_y])
         Analysis.plt.gca().invert_xaxis()
 
         ax3 = Analysis.plt.subplot(gs[1]) 
@@ -92,13 +92,13 @@ class PlottingFunctions():
             data[:,0] = data[:,0] - data[0,0] # reset to zero      
             data = Analysis.getDataForTimeSimPlot(data)
             
-            Analysis.plt.plot(data[:,0],data[:,1],color=main_colors[m-1])    
+            Analysis.plt.plot(data[:, 0], data[:, 1], color=main_colors[m - 1])
             
         Analysis.plt.title('$n(t)$')
-        Analysis.plt.axvline(np.log(2)/self.sim_volume_growth_rate,ls='dashed',color='black',lw=0.5)        
+        Analysis.plt.axvline(np.log(2) / self.sim_volume_growth_rate, ls='dashed', color='black', lw=0.5)
         Analysis.plt.yticks([])
-        Analysis.plt.xlim([0,max_x])
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.xlim([0, max_x])
+        Analysis.plt.ylim([0, max_y])
         self.StochSim.plot.plotnum+=1 
                  
         
@@ -112,8 +112,8 @@ class PlottingFunctions():
             sample = 'extant'
        
         Analysis.plt.figure(self.StochSim.plot.plotnum)
-        gs = Analysis.gridspec.GridSpec(2, 3,width_ratios=[0.333,1,0.33333],height_ratios=[1,0.333])
-        ax1 = Analysis.plt.subplot(gs[0,2])  
+        gs = Analysis.gridspec.GridSpec(2, 3, width_ratios=[0.333, 1, 0.33333], height_ratios=[1, 0.333])
+        ax1 = Analysis.plt.subplot(gs[0, 2])
 
         # do now a long simulation for accurate distributions
         sample_ = copy.copy(sample)
@@ -124,9 +124,9 @@ class PlottingFunctions():
         max_x = max(self._interdivision_times)
         Analysis.plt.yticks([])
         max_y = np.ceil(max(self._volume_at_division))
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.ylim([0, max_y])
 
-        ax2 =  Analysis.plt.subplot(gs[0,0]) 
+        ax2 =  Analysis.plt.subplot(gs[0, 0])
 
         self.StochSim.plot.plotnum -= 1 
         self.PlotVolumeAtDivisionDistribution(sample=sample,orientation='horizontal',title='',xlabel='',ylabel='',colors='#56B3E9')
@@ -134,19 +134,19 @@ class PlottingFunctions():
         self.StochSim.plot.plotnum -= 1
         self.PlotVolumeAtBirthDistribution(sample=sample,orientation='horizontal',title=r'$V_{a,%s}$' % sample,xlabel = 'Volume/cell',colors='#CC79A7',multiplotting=True)
 
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.ylim([0, max_y])
         Analysis.plt.gca().invert_xaxis()
 
-        ax3 =  Analysis.plt.subplot(gs[1,1]) 
+        ax3 =  Analysis.plt.subplot(gs[1, 1])
         self.StochSim.plot.plotnum -= 1
 
         self.PlotInterdivisionTimeDistribution(sample=sample,bins=25,title=r'$f_{%s}(t)$' % sample,colors='#0072B2',multiplotting=True)
-        Analysis.plt.axvline(np.log(2)/self.sim_volume_growth_rate,ls='dashed',color='black',lw=0.5)
+        Analysis.plt.axvline(np.log(2) / self.sim_volume_growth_rate, ls='dashed', color='black', lw=0.5)
         Analysis.plt.gca().invert_yaxis()
 
-        Analysis.plt.xlim([0,max_x])
+        Analysis.plt.xlim([0, max_x])
 
-        ax4 = Analysis.plt.subplot(gs[0,1])  
+        ax4 = Analysis.plt.subplot(gs[0, 1])
         self.StochSim.plot.plotnum -= 1
 
         # central plot - do a short simulation for a neat time series plot       
@@ -166,12 +166,12 @@ class PlottingFunctions():
             data[:,0] = data[:,0] - data[0,0] # reset to zero      
             data = Analysis.getDataForTimeSimPlot(data)
             
-            Analysis.plt.plot(data[:,0],data[:,1],color=main_colors[m-1])    
+            Analysis.plt.plot(data[:, 0], data[:, 1], color=main_colors[m - 1])
             
         Analysis.plt.title('$n(t)$')        
-        Analysis.plt.axvline(np.log(2)/self.sim_volume_growth_rate,ls='dashed',color='black',lw=0.5)
-        Analysis.plt.xlim([0,max_x])
-        Analysis.plt.ylim([0,max_y])
+        Analysis.plt.axvline(np.log(2) / self.sim_volume_growth_rate, ls='dashed', color='black', lw=0.5)
+        Analysis.plt.xlim([0, max_x])
+        Analysis.plt.ylim([0, max_y])
         Analysis.plt.yticks([])
         Analysis.plt.tight_layout()
         self.StochSim.plot.plotnum+=1     
@@ -370,13 +370,13 @@ class PlottingFunctions():
                 j=0
 
             if sample.lower() == 'mother':                         
-                output = Analysis.plt.hist(self.data_stochsim.volume,bins=20,color = colors[j],histtype=histtype,normed=True,orientation=orientation) # TODO hardcoded # bins
+                output = Analysis.plt.hist(self.data_stochsim.volume, bins=20, color = colors[j], histtype=histtype, normed=True, orientation=orientation) # TODO hardcoded # bins
             else:
                 assert self._IsAnalyzedExtant, "First analyze the extant cells (.AnalyzeExtantCells())."          
                 sample = 'extant'
                 x = self.data_stochsim_celldivision.volume_extant_distribution[0]
                 y = self.data_stochsim_celldivision.volume_extant_distribution[1]                
-                output = Analysis.plt.hist(x,len(x)-1,weights=y,normed=True,ls=linestyle,lw=linewidth,histtype=histtype,color=colors[j],orientation=orientation,align='left')
+                output = Analysis.plt.hist(x, len(x) - 1, weights=y, normed=True, ls=linestyle, lw=linewidth, histtype=histtype, color=colors[j], orientation=orientation, align='left')
             j+=1
 
         if '(sample = )' in title:
@@ -387,12 +387,12 @@ class PlottingFunctions():
             Analysis.plt.xlabel(ylabel)
             Analysis.plt.ylabel(xlabel)    
             if multiplotting:
-                Analysis.plt.xticks([0,max(output[0])*1.2])
+                Analysis.plt.xticks([0, max(output[0]) * 1.2])
         else:             
             Analysis.plt.xlabel(xlabel)
             Analysis.plt.ylabel(ylabel)    
             if multiplotting:
-                Analysis.plt.yticks([0,max(output[0])*1.2])
+                Analysis.plt.yticks([0, max(output[0]) * 1.2])
         self.StochSim.plot.plotnum+=1         
 
    
@@ -491,17 +491,17 @@ class PlottingFunctions():
                 j=0               
 
             if sample.lower() == 'baby':             
-                Analysis.plt.plot(tau,f_b,drawstyle='steps-mid',color=colors[j]) 
+                Analysis.plt.plot(tau, f_b, drawstyle='steps-mid', color=colors[j])
                 max_y = max(f_b)               
                 if title == False:
                     title = r'$f_b(t)$'
             elif sample.lower() == 'mother':
-                Analysis.plt.plot(tau,f_m,drawstyle='steps-mid',color=colors[j])
+                Analysis.plt.plot(tau, f_m, drawstyle='steps-mid', color=colors[j])
                 max_y = max(f_m)  
                 if title == False:
                     title = r'$f_m(t)$'
             else: # extant
-                Analysis.plt.plot(tau,f_e,drawstyle='steps-mid',color=colors[j])
+                Analysis.plt.plot(tau, f_e, drawstyle='steps-mid', color=colors[j])
                 max_y = max(f_e)  
                 if title == False:
                     title = r'$f_e(t)$'                
@@ -517,7 +517,7 @@ class PlottingFunctions():
         Analysis.plt.ylabel(ylabel)        
        
         if multiplotting:
-            Analysis.plt.yticks([0,round(max_y*1.2,2)])     
+            Analysis.plt.yticks([0, round(max_y * 1.2, 2)])
              
         
     def PlotCellAgeDistribution(self, bins=50,  histtype = 'step', linestyle = 'solid', filled = False, linewidth = 1,colors=None,title = '',xlabel='Cell Age',ylabel='PDF',orientation='vertical'):
@@ -579,7 +579,7 @@ class PlottingFunctions():
                 n_bins = 1 + (dat_max-dat_min) /bin_size # Just take one trajectory as reference
                 L_bin_edges = np.linspace(dat_min-bin_size/2.0,dat_max+bin_size/2.0,n_bins+1) 
                      
-                output = Analysis.plt.hist(data[:,s_index], L_bin_edges, normed=True, histtype = histtype, ls = linestyle, fill = filled, lw = linewidth, color = colors[m],orientation=orientation) 
+                output = Analysis.plt.hist(data[:, s_index], L_bin_edges, normed=True, histtype = histtype, ls = linestyle, fill = filled, lw = linewidth, color = colors[m], orientation=orientation)
         
         self.StochSim.plot.plotnum += 1        
         Analysis.plt.title(title)
@@ -589,16 +589,16 @@ class PlottingFunctions():
             Analysis.plt.xlim(xmin=0)
             Analysis.plt.ylim(ymin=0) 
             if multiplotting:
-                Analysis.plt.xticks([0,max(output[0])*1.2])                      
+                Analysis.plt.xticks([0, max(output[0]) * 1.2])
         else:             
             Analysis.plt.xlabel(xlabel)
             Analysis.plt.ylabel(ylabel)   
             Analysis.plt.xlim(xmin=0)
             Analysis.plt.ylim(ymin=0)       
             if multiplotting:
-                Analysis.plt.yticks([0,max(output[0])*1.2])               
+                Analysis.plt.yticks([0, max(output[0]) * 1.2])
         if IsLegend:
-            Analysis.plt.legend(species2plot,numpoints=1,frameon=True,loc=legend_location)        
+            Analysis.plt.legend(species2plot, numpoints=1, frameon=True, loc=legend_location)
         
             
     def _PlotVolume(self, plottype, sample = 'extant',bins=10, histtype = 'step', linestyle = 'solid', filled = False, linewidth = 1,colors=None,title = '',xlabel='Volume',ylabel='PDF',orientation='vertical',multiplotting=False):
@@ -646,7 +646,7 @@ class PlottingFunctions():
                 if j >= len(colors):                  
                     j=0    
                 
-                output = Analysis.plt.hist(data,bins= bins,normed=True,histtype=histtype,ls=linestyle,fill=filled,lw=linewidth,color=colors[j],align=align,orientation=orientation)
+                output = Analysis.plt.hist(data, bins= bins, normed=True, histtype=histtype, ls=linestyle, fill=filled, lw=linewidth, color=colors[j], align=align, orientation=orientation)
             
             else: # extant
                 assert self._IsAnalyzedExtant, "First analyze the extant cells (.AnalyzeExtantCells())."    
@@ -660,7 +660,7 @@ class PlottingFunctions():
                 if j >= len(colors):                  
                     j=0   
                 
-                output = Analysis.plt.hist(x,len(x)-1,weights = y,ls = linestyle,lw = linewidth,histtype = histtype,color = colors[j],orientation=orientation,align='left',normed=True)
+                output = Analysis.plt.hist(x, len(x) - 1, weights = y, ls = linestyle, lw = linewidth, histtype = histtype, color = colors[j], orientation=orientation, align='left', normed=True)
             
             j+=1
         
@@ -673,12 +673,12 @@ class PlottingFunctions():
             Analysis.plt.xlabel(ylabel)
             Analysis.plt.ylabel(xlabel)    
             if multiplotting:
-                Analysis.plt.xticks([0,max(output[0])*1.2])
+                Analysis.plt.xticks([0, max(output[0]) * 1.2])
         else:             
             Analysis.plt.xlabel(xlabel)
             Analysis.plt.ylabel(ylabel)    
             if multiplotting:
-                Analysis.plt.yticks([0,max(output[0])*1.2])
+                Analysis.plt.yticks([0, max(output[0]) * 1.2])
                 
 
     def PlotVolumeTimeSeries(self,n_events2plot = 10000,linestyle = 'solid', linewidth = 1,marker = '',colors = None,title = '', xlabel = 'Time', ylabel = 'Volume',deterministic=True):
@@ -715,11 +715,11 @@ class PlottingFunctions():
                 j=0
                                 
             if deterministic:                
-                Arr_volume = Analysis.getDataForTimeSimPlot(self.data_stochsim_celldivision.getVolumeDeterministic(),quiet=self.StochSim._IsQuiet)
+                Arr_volume = Analysis.getDataForTimeSimPlot(self.data_stochsim_celldivision.getVolumeDeterministic(), quiet=self.StochSim._IsQuiet)
             else:
-                Arr_volume = Analysis.getDataForTimeSimPlot(self.data_stochsim.getVolume(),quiet= self.StochSim._IsQuiet)
+                Arr_volume = Analysis.getDataForTimeSimPlot(self.data_stochsim.getVolume(), quiet= self.StochSim._IsQuiet)
             
-            Analysis.plt.plot(Arr_volume[:,0],Arr_volume[:,1], marker, ls = linestyle, lw = linewidth, color = colors[j])  
+            Analysis.plt.plot(Arr_volume[:, 0], Arr_volume[:, 1], marker, ls = linestyle, lw = linewidth, color = colors[j])
             j+=1 
         Analysis.plt.title(title)
         Analysis.plt.xlabel(xlabel)
@@ -796,7 +796,7 @@ class PlottingFunctions():
         assert self.StochSim._IsSimulationDone, "First do a stochastic simulation"
         assert not self.StochSim._IsOnlyLastTimepoint, "Plotting is disabled when saving only the last time point"
         #Make two subplots
-        gs = Analysis.gridspec.GridSpec(2,1)
+        gs = Analysis.gridspec.GridSpec(2, 1)
         plotnum = self.StochSim.plot.plotnum
         Analysis.plt.figure(plotnum);
         
@@ -898,7 +898,7 @@ class PlottingFunctions():
         plotnum = self.StochSim.plot.plotnum
         Analysis.plt.figure(plotnum);
             
-        Analysis.plt.errorbar(self.data_stochsim_grid.time,self.data_stochsim_grid.volume_means[0],yerr = nstd*self.data_stochsim_grid.volume_standard_deviations[0],ls=linestyle,lw=linewidth,marker=marker,color=color)
+        Analysis.plt.errorbar(self.data_stochsim_grid.time, self.data_stochsim_grid.volume_means[0], yerr =nstd * self.data_stochsim_grid.volume_standard_deviations[0], ls=linestyle, lw=linewidth, marker=marker, color=color)
 
         Analysis.plt.title(title)
         Analysis.plt.xlabel(xlabel)
@@ -928,7 +928,7 @@ class PlottingFunctions():
         assert self.StochSim._IsSimulationDone, "First do a stochastic simulation"   
         assert not self.StochSim._IsOnlyLastTimepoint, "Plotting is disabled when saving only the last time point"
         #Make two subplots
-        gs = Analysis.gridspec.GridSpec(2,1)
+        gs = Analysis.gridspec.GridSpec(2, 1)
         plotnum = self.StochSim.plot.plotnum
         Analysis.plt.figure(plotnum);
         

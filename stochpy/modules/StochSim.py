@@ -12,7 +12,7 @@ Last Change: Augustus 10, 2015
 ############################ IMPORTS ################################
 from __future__ import division, print_function, absolute_import
 
-import sys,copy,time,os,subprocess,bisect,math,shutil
+import sys,copy,time,os,subprocess, math,shutil
 from io import BytesIO   
 
 try:
@@ -548,9 +548,9 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self.sim_species_tracked = copy.copy(self.SSA.species_names)    
                 self.sim_trajectories_done = copy.copy(self.sim_trajectories)
                 try:
-                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names,self.plot.plotnum,quiet)
+                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names, self.plot.plotnum, quiet)
                 except:
-                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names,quiet = quiet)
+                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names, quiet = quiet)
                 self._IsSimulationDone = True
                 if not quiet:
                    print("Info: Data successfully parsed into StochPy")
@@ -643,9 +643,9 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self.sim_species_tracked = copy.copy(self.SSA.species_names)    
                 self.sim_trajectories_done = copy.copy(self.sim_trajectories)
                 try: 
-                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names,self.plot.plotnum)
+                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names, self.plot.plotnum)
                 except:
-                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names)
+                    self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names)
                 self._IsSimulationDone = True
                 if not quiet: print("Info: Data successfully parsed into StochPy")
     
@@ -782,9 +782,9 @@ class SSA(PlottingFunctions,PrintingFunctions):
         self._IsSimulationDone = True      
         self.sim_trajectories_done = copy.copy(self.sim_trajectories)
         try: 
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.sim_rates_tracked,self.plot.plotnum,quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.sim_rates_tracked, self.plot.plotnum, quiet)
         except:
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.sim_rates_tracked,quiet=quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.sim_rates_tracked, quiet=quiet)
         if IsStatusBar:
             t2 = time.time()          
             self.simulation_time = t2-t1
@@ -1005,7 +1005,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
         else:
             self.sim_species_tracked = copy.copy(self.SSA.species_names)           
                         
-        (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.SSA.sim_output,self.sim_species_tracked)      
+        (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.SSA.sim_output, self.sim_species_tracked)
         m1 = [np.array(list(D_moments[s_id].values())) for s_id in self.sim_species_tracked]      
         IsContinue = True
         if not quiet:
@@ -1014,7 +1014,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
         while IsContinue:          
             self.settings = SSASettings(x_matrix=self.SSA.X_matrixinit,timesteps=size*(n+1),starttime=self.SSA.sim_t,endtime=10**50, species_selection=species_selection, track_propensities=self._IsTrackPropensities,rate_selection = rate_selection,last_timepoint=False,seed = self._IsSeed,quiet=quiet)      
             self.SSA.Execute(self.settings)
-            (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetDataDistributions(self.SSA.sim_output,self.sim_species_tracked)          
+            (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetDataDistributions(self.SSA.sim_output, self.sim_species_tracked)
             m2 = [np.array(list(D_moments[s_id].values())) for s_id in self.sim_species_tracked] 
             max_total = 0
             for i in range(self.SSA.n_species): 
@@ -1035,9 +1035,9 @@ class SSA(PlottingFunctions,PrintingFunctions):
         self._IsSimulationDone = True
         self.sim_trajectories_done = copy.copy(self.sim_trajectories)
         try:
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.sim_rates_tracked,self.plot.plotnum,quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.sim_rates_tracked, self.plot.plotnum, quiet)
         except:
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.sim_rates_tracked,quiet=quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.sim_rates_tracked, quiet=quiet)
             
 
     def _getSpecies2Plot(self,species2plot):
@@ -1072,7 +1072,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
         for n in range(1,self.sim_trajectories_done+1): 
             if self.sim_trajectories_done > 1:
                 self.GetTrajectoryData(n)
-            D_waitingtimes = Analysis.ObtainWaitingtimes(self.data_stochsim,self.SSA.rate_names) # hard coded for all reactions
+            D_waitingtimes = Analysis.ObtainWaitingtimes(self.data_stochsim, self.SSA.rate_names) # hard coded for all reactions
             self.data_stochsim.setWaitingtimes(D_waitingtimes,self.SSA.rate_names)
             self.data_stochsim.setWaitingtimesMeans(self.data_stochsim.waiting_times,self.SSA.rate_names)        
             self.data_stochsim.setWaitingtimesStandardDeviations(self.data_stochsim.waiting_times,self.SSA.rate_names)
@@ -1235,7 +1235,8 @@ class SSA(PlottingFunctions,PrintingFunctions):
         for n in range(self.sim_trajectories_done):               
             for s_id in species2calc:                  
                 s_index = self.sim_species_tracked.index(s_id)
-                L_species_autocorrelations[s_index].append(Analysis.Autocorrelation(self.data_stochsim_grid.species[s_index][n]))  
+                L_species_autocorrelations[s_index].append(
+                    Analysis.Autocorrelation(self.data_stochsim_grid.species[s_index][n]))
             
         self.data_stochsim_grid.setSpeciesAutocorrelations(L_species_autocorrelations)
         
@@ -1280,7 +1281,8 @@ class SSA(PlottingFunctions,PrintingFunctions):
         for n in range(self.sim_trajectories_done):               
             for r_id in rates:
                 r_index = self.sim_rates_tracked.index(r_id)   
-                L_Propensities_autocorrelations[r_index].append(Analysis.Autocorrelation(self.data_stochsim_grid.propensities[r_index][n]))
+                L_Propensities_autocorrelations[r_index].append(
+                    Analysis.Autocorrelation(self.data_stochsim_grid.propensities[r_index][n]))
                     
         self.data_stochsim_grid.setPropensitiesAutocorrelations(L_Propensities_autocorrelations)
         self.data_stochsim_grid.propensities_autocorrelations_means, self.data_stochsim_grid.propensities_autocorrelations_standard_deviations = Analysis.GetAverageResults(self.data_stochsim_grid.propensities_autocorrelations)
@@ -1302,7 +1304,8 @@ class SSA(PlottingFunctions,PrintingFunctions):
         for n in range(self.sim_trajectories_done):                
             for r_id in rates:
                 r_index = self.sim_rates_tracked.index(r_id)   
-                L_Propensities_autocovariances[r_index].append(Analysis.AutoCov(self.data_stochsim_grid.propensities[r_index][n]))
+                L_Propensities_autocovariances[r_index].append(
+                    Analysis.AutoCov(self.data_stochsim_grid.propensities[r_index][n]))
               
         self.data_stochsim_grid.setPropensitiesAutocovariances(L_Propensities_autocovariances)
         self.data_stochsim_grid.propensities_autocovariances_means, self.data_stochsim_grid.propensities_autocovariances_standard_deviations = Analysis.GetAverageResults(self.data_stochsim_grid.propensities_autocovariances)                      
@@ -1838,9 +1841,9 @@ class SSA(PlottingFunctions,PrintingFunctions):
         self.data_stochsim = IntegrationStochasticDataObj()           
         self.FillDataStochsim(IsImport=True)     
         try:
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names,self.plot.plotnum,quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names, self.plot.plotnum, quiet)
         except:
-            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.SSA.rate_names,quiet=quiet)
+            self.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.SSA.rate_names, quiet=quiet)
         self._IsSimulationDone = True        
             
 
@@ -1906,7 +1909,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
         else:
             self.sim_rates_tracked = copy.copy(self.SSA.rate_names)             
         
-        (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.SSA.sim_output,self.sim_species_tracked)    
+        (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.SSA.sim_output, self.sim_species_tracked)
         sim_dat = np.array(self.SSA.sim_output)   
         self.data_stochsim.setTime(sim_dat[:,0])
         self.data_stochsim.setSpeciesDistributions(L_probability_mass,D_means,D_stds,D_moments)        
@@ -1918,6 +1921,6 @@ class SSA(PlottingFunctions,PrintingFunctions):
             
         self.data_stochsim.setSimulationInfo(self.SSA.timestep,self.SSA.sim_t,self._current_trajectory)
         if self._IsTrackPropensities:
-            (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetDataDistributions(self.SSA.propensities_output,self.sim_rates_tracked)
+            (L_probability_mass,D_means,D_stds,D_moments) = Analysis.GetDataDistributions(self.SSA.propensities_output, self.sim_rates_tracked)
             self.data_stochsim.setPropensitiesDistributions(L_probability_mass,D_means,D_stds,D_moments)
             self.data_stochsim.setPropensities(self.SSA.propensities_output,self.sim_rates_tracked)

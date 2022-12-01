@@ -14,7 +14,7 @@ Last Change: August 10, 2015
 from __future__ import division, print_function, absolute_import
 
 ############################## IMPORTS ###################################
-import os,sys,copy,time,random
+import os,sys, time,random
 
 try:
     import pickle
@@ -27,7 +27,7 @@ from .StochPyCellDivisionPlot import *
 from .PyscesMiniModel import IntegrationStochasticDataObj,RegularGridDataObj
 
 from ..tools.Progress_bar import Progress_bar
-from ..tools.ParseDistributions import ParseDistributions,convertInput2IndicesAndValues,MakeDistributionFunction
+from ..tools.ParseDistributions import convertInput2IndicesAndValues,MakeDistributionFunction
 from ..tools.kSolver import k_solver
 from ..tools.ExtrapolateExtant import ExtrapolateExtant
 
@@ -73,7 +73,7 @@ class CellDivision(ExtrapolateExtant,PlottingFunctions):
         self.output_dir = output_dir
         self.model_dir = dir
         self.temp_dir = temp_dir
-        self.StochSim = StochSim.SSA(method,model_file,dir,mode='steps',IsTrackPropensities=False,IsQuiet=IsQuiet)
+        self.StochSim = StochSim.SSA(method, model_file, dir, mode='steps', IsTrackPropensities=False, IsQuiet=IsQuiet)
         self.StochSim._IsCellDivision=True
         self.sim_mode = mode.lower()
         self.sim_steps = 10**50
@@ -736,7 +736,7 @@ class CellDivision(ExtrapolateExtant,PlottingFunctions):
         ### Do simulation
         progressBar = Progress_bar(cycles_total = self.StochSim.sim_trajectories, done_msg = 'time')
         for self.StochSim._current_trajectory in range(1,self.StochSim.sim_trajectories+1):
-            self.StochSim.settings = StochSim.SSASettings(x_matrix = self.StochSim.SSA.X_matrixinit,timesteps = self.sim_steps,starttime = 0,endtime = 0,track_propensities = self.StochSim._IsTrackPropensities,species_selection=species_selection,rate_selection = rate_selection,last_timepoint=IsOnlyLastTimepoint, seed=self.StochSim._IsSeed, quiet=quiet)
+            self.StochSim.settings = StochSim.SSASettings(x_matrix = self.StochSim.SSA.X_matrixinit, timesteps = self.sim_steps, starttime = 0, endtime = 0, track_propensities = self.StochSim._IsTrackPropensities, species_selection=species_selection, rate_selection = rate_selection, last_timepoint=IsOnlyLastTimepoint, seed=self.StochSim._IsSeed, quiet=quiet)
 
             if self.StochSim._IsSeed:                 # necessary to get correct seeding of each generation
                 np.random.seed(5)
@@ -820,9 +820,9 @@ class CellDivision(ExtrapolateExtant,PlottingFunctions):
         self.StochSim._IsSimulationDone = True
         self.data_stochsim = copy.copy(self.StochSim.data_stochsim)
         try:
-            self.StochSim.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.StochSim.SSA.rate_names,self.StochSim.plot.plotnum,quiet=quiet)
+            self.StochSim.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.StochSim.SSA.rate_names, self.StochSim.plot.plotnum, quiet=quiet)
         except:
-            self.StochSim.plot = Analysis.DoPlotting(self.data_stochsim.species_labels,self.StochSim.SSA.rate_names,quiet=quiet)
+            self.StochSim.plot = Analysis.DoPlotting(self.data_stochsim.species_labels, self.StochSim.SSA.rate_names, quiet=quiet)
 
         if len(self._generation_timesteps) > 3:
             self.AnalyzeExtantCells() # done with default settings
@@ -1389,14 +1389,14 @@ class CellDivision(ExtrapolateExtant,PlottingFunctions):
             self.data_stochsim_celldivision.setSpeciesAtDivision(self._species_at_division,self.StochSim.sim_species_tracked)
             self.data_stochsim_celldivision.setSpeciesAtBirth(self._species_at_birth,self.StochSim.sim_species_tracked)
 
-            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.data_stochsim_celldivision.getSpeciesAtDivision(),self.StochSim.sim_species_tracked)
+            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.data_stochsim_celldivision.getSpeciesAtDivision(), self.StochSim.sim_species_tracked)
             self.data_stochsim_celldivision.setSpeciesAtDivisionDistributions(L_probability_mass,D_means,D_stds,D_moments)
-            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.data_stochsim_celldivision.getSpeciesAtBirth(),self.StochSim.sim_species_tracked)
+            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetSpeciesDistributions(self.data_stochsim_celldivision.getSpeciesAtBirth(), self.StochSim.sim_species_tracked)
             self.data_stochsim_celldivision.setSpeciesAtBirthDistributions(L_probability_mass,D_means,D_stds,D_moments)
 
-            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetDataDistributions(self.data_stochsim_celldivision.getVolumeAtDivision(),['v'])
+            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetDataDistributions(self.data_stochsim_celldivision.getVolumeAtDivision(), ['v'])
             self.data_stochsim_celldivision.setVolumeAtDivisionDistribution(L_probability_mass,D_means,D_stds,D_moments)
-            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetDataDistributions(self.data_stochsim_celldivision.getVolumeAtBirth(),['v'])
+            (L_probability_mass, D_means, D_stds,D_moments) = Analysis.GetDataDistributions(self.data_stochsim_celldivision.getVolumeAtBirth(), ['v'])
             self.data_stochsim_celldivision.setVolumeAtBirthDistribution(L_probability_mass,D_means,D_stds,D_moments)
 
 

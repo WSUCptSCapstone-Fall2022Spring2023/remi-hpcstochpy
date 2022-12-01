@@ -55,7 +55,7 @@ __doc__ =   """
 
 from .core2.version import __version__
 
-import os,shutil,sys
+import os,shutil
 
 try:
     import readline
@@ -167,24 +167,24 @@ if os.sys.platform != 'win32':
     if not os.path.exists(os.path.join(os.path.expanduser('~'),'Stochpy')):
         os.makedirs(os.path.join(os.path.expanduser('~'),'Stochpy'))
     if not os.path.exists(os.path.join(os.path.expanduser('~'),'Stochpy', 'pscmodels')):
-        os.makedirs(os.path.join(os.path.expanduser('~'),'Stochpy','pscmodels'))        
+        os.makedirs(os.path.join(os.path.expanduser('~'),'Stochpy', 'pscmodels'))
     if not os.path.exists(os.path.join(os.path.expanduser('~'),'Stochpy', 'temp')):
         os.makedirs(os.path.join(os.path.expanduser('~'),'Stochpy','temp'))
 
     output_dir = os.path.join(os.path.expanduser('~'),'Stochpy')
-    model_dir = os.path.join(os.path.expanduser('~'),'Stochpy','pscmodels')
+    model_dir = os.path.join(os.path.expanduser('~'),'Stochpy', 'pscmodels')
     temp_dir = os.path.join(os.path.expanduser('~'),'Stochpy','temp')
     InitiateModels(model_dir)
 else:
     if not os.path.exists(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy')):
         os.makedirs(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy'))
-    if not os.path.exists(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','pscmodels')):
-        os.makedirs(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','pscmodels'))        
+    if not os.path.exists(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy', 'pscmodels')):
+        os.makedirs(os.path.join(os.getenv('HOMEDRIVE') + os.path.sep,'Stochpy', 'pscmodels'))
     if not os.path.exists(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','temp')):
         os.makedirs(os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','temp'))
         
     output_dir = os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy',)
-    model_dir = os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','pscmodels')
+    model_dir = os.path.join(os.getenv('HOMEDRIVE') + os.path.sep,'Stochpy', 'pscmodels')
     temp_dir = os.path.join(os.getenv('HOMEDRIVE')+os.path.sep,'Stochpy','temp')
     InitiateModels(model_dir)
  
