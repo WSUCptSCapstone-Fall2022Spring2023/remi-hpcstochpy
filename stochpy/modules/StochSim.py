@@ -15,7 +15,8 @@ from __future__ import division, print_function, absolute_import
 import sys, copy, time, os, subprocess, math, shutil, numba
 from io import BytesIO
 import numpy
-from numba import jit
+from numba.experimental import jitclass
+from numba import intc, float64, boolean
 
 try:
     import pickle
@@ -42,12 +43,27 @@ try:
     IS_STOCHPY_KIT = True
 except ImportError:
     IS_STOCHPY_KIT = False
-    
 
+
+spec = [
+    ('X_matrix', ),
+    ('timesteps', intc),
+    ('starttime', float64),
+    ('endtime', float64),
+    ('track_propensities', boolean),
+    ('species_selection',),
+    ('rate_selection',),
+    ('last_timepoint',),
+    ('seed',),
+    ('quiet',),
+]
+
+
+@jitclass(spec)
 class SSASettings():
     """   
     Input:
-     - *x_matrix* (array)
+     - *x_matrix* (ndarray)
      - *timesteps* (integer)
      - *starttime* (float)
      - *endtime* (float)

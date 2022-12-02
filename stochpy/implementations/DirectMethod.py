@@ -18,7 +18,6 @@ Last Change: June 23, 2015
 """
 
 from __future__ import division, print_function, absolute_import
-from numba import jit
 
 __doc__ = """
           Direct Method
@@ -33,13 +32,18 @@ __doc__ = """
           """
 ############################# IMPORTS ####################################
 
-import sys,copy,time,os,operator
+import sys,copy,time,os,operator, numpy
 from .StochPyTools import __species__,StochPySSA_Shared,np
+from numba import jit
+from numba.experimental import jitclass
     
 ########################### END IMPORTS ##################################
-  
+
+
+@jitclass()
 class DirectMethod(StochPySSA_Shared):
-    """ 
+    """
+
     Direct Stochastic Simulation Algorithm from Gillespie (1977) [1].
 
     This algorithm is used to generate exact realizations of the Markov jump process. Of course, the algorithm is stochastic, so these realizations are different for each run.
@@ -53,87 +57,6 @@ class DirectMethod(StochPySSA_Shared):
     def __init__(self,model_file,model_dir,IsQuiet=False):    
         self.Parse(model_file,model_dir,IsQuiet=IsQuiet)   
 
-    def Execute(self,settings,IsStatusBar=False):       
-        """
-        Generates a trajectory of the Markov jump process.
-
-        Input:
-         - *settings* (class object)   
-        """
-
-        time1 = time.time()
-
-        if settings.IsSeed:
-            np.random.seed(5)     
-        
-        self._IsInitial = True
-        self.settings = settings
-        self.sim_t = copy.copy(settings.starttime)  # does not have to start at zero if we perform sequential simulations         
-        self.X_matrix = copy.deepcopy(settings.X_matrix) 
-        self.fixed_species_amount = copy.deepcopy(self.parse.fixed_species_amount)                  
-        
-        try:
-            self.volume_code = settings.volume_code
-        except AttributeError:                      # No volume_code present in settings
-            self.volume_code = "self._current_volume = 1"     
-        
-        #self.species_to_update = [s for s in range(self.n_species)] # ensure that the first run updates all species   
-        self.Propensities() 
-            
-        if not self.sim_t: 
-            self.timestep = 1   
-            self.sim_output = []
-            self.propensities_output = []              
-            self.V_output = []
-            self._IsTrackPropensities = copy.copy(settings.IsTrackPropensities)
-            self.SpeciesSelection()   
-            self.RateSelection()                           
-            self.SetEvents()  # April 15, moved into here, because otherwise each new cell division cycle starts with a time event, if specified            
-            if not settings.IsOnlyLastTimepoint:
-                self.Initial_Conditions()                            
-                            
-        nstep_counter = 1
-        t1 = time.time()
-        while (self.sim_t < settings.endtime) and (self.timestep < settings.timesteps):    
-            if self.sim_a_0 <= 0:                         # All reactants got exhausted
-                settings.endtime = 10**50
-                break
-            
-            self.RunExactTimestep()                       # Run direct SSA 
-            self.HandleEvents()
-            
-            # Update Propensities selectively            
-            if self.sim_t < settings.endtime:  
-                if not self._IsPerformEvent:
-                    self.species_to_update = self.parse.reaction_affects[self.reaction_index] # Determine vars to update                
-                else:
-                    self.species_to_update = [s for s in range(self.n_species)]         
-                
-                self.Propensities()
-                
-                if not settings.IsOnlyLastTimepoint:      # Store Output
-                    self.GenerateOutput()
-                    
-            self._IsPerformEvent = False                  # set to false (or just to make sure).
-            t2 = time.time()        
-            if IsStatusBar and t2-t1> 1:
-                t1 = time.time()
-                sys.stdout.write('\rsimulating {0:s}\r'.format('.'*nstep_counter) ) 
-                sys.stdout.flush() 
-                nstep_counter+=1
-                if nstep_counter > 10:
-                    nstep_counter = 1                
-                    sys.stdout.write('\rsimulating {0:s}         '.format('.'*nstep_counter))
-                    sys.stdout.flush()
-        if settings.IsOnlyLastTimepoint or settings.endtime != 10**50: 
-            self.GenerateOutput()                         
-        if IsStatusBar and t1 and not settings.quiet:
-            sys.stdout.write('\rsimulation done!               \n')
-
-        time2 = time.time()
-        print("Direct Method Execute time: ", time2 - time1, " seconds")
-
-    # @jit(nopython=True)
     def jit_execute(self, settings, IsStatusBar=False):
         """
         Generates a trajectory of the Markov jump process.

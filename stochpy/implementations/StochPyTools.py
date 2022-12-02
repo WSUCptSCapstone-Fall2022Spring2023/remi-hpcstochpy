@@ -11,6 +11,7 @@ Last Change: June 08, 2015
 import re,sys,copy
 from stochpy import model_dir as stochpy_model_dir
 from ..modules.PyscesMiniModel import PySCeS_Connector
+from numba.experimental import jitclass
 
 try: 
     import numpy as np
@@ -29,6 +30,8 @@ class Species():
     
 __species__ = Species()
 
+
+@jitclass()
 class StochPySSA_Shared(): 
     def Parse(self,model_file,model_dir,IsTauleaping=False,IsNRM=False,IsDelayed = False,IsSMM = False,IsQuiet=False):
         """
@@ -45,7 +48,7 @@ class StochPySSA_Shared():
                 model_dir = stochpy_model_dir
                 
             self.N_matrix_transpose = copy.deepcopy(self.parse.N_matrix.transpose()) # June 5th 2012
-            self.X_matrixinit = copy.deepcopy(self.parse.X_matrix.transpose()[0])        
+            self.X_matrixinit = copy.deepcopy(self.parse.X_matrix.transpose()[0])        # nparray
 
             self.rate_names = copy.deepcopy(self.parse.Mod.__reactions__)  
             self.rate_pos = {r_id:j for j,r_id in enumerate(self.rate_names)} # Determine once for each rate it's position
