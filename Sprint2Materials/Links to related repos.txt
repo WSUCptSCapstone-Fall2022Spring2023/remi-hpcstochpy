@@ -1,0 +1,14 @@
+https://github.com/epimodels/transientdynamics
+
+https://github.com/epimodels/protective_decol
+
+https://github.com/epimodels/contactchange
+
+https://github.com/epimodels/chg_bathing
+
+https://github.com/epimodels/Metapopulation_MRSA
+
+https://github.com/elofgren/PoolQueue
+
+https://github.com/elofgren/PML
+
