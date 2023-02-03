@@ -1,7 +1,7 @@
 # Sprint 3 Report (1/9/2023 - 2/2/2023)
 
 ## What's New
- * Prototype project report finalized
+ * First draft of MVP report completed
  * Ongoing implementation of Numba features into StochPy source code
  * Further research into potential application of Dask as well as how it works
 
@@ -13,14 +13,13 @@ Unfinished work includes fully implementing Dask and Numba features into StochPy
 
 ## Completed Issues
 Here are links to the issues that we completed in this sprint:
-* [Upload Dask Template example](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/47)
-* [Finish Sprint 3 documentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/54)
-* [Upload Case Studies folder missing from Sprint 2](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/51)
-* [Complete prototype project report](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/41)
-* [Create class presentation materials](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/42)
-* [Upload 12.2 client meeting minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/50)
-* [Upload meeting minutes from 11.7.2022](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/45)
-* [Create client prototype demo materials](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/43)
+* [Upload 1.18.23 Team Meeting Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/58)
+* [Upload 1.25.23 Team Meeting Minutes](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/60)
+* [Add Research Links](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/66)
+* [2/1/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/62)
+* [2/2/23 Client Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/63)
+* [Submit the first deaft of MVP Project Report](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/57)
+* [Submit Sprint 4 Report Materials](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/68)
 
  ## Incomplete Issues
 There are some issues assigned to this sprint that remain incomplete, mostly due to implementation being ongoing. These issues are:
@@ -29,8 +28,7 @@ There are some issues assigned to this sprint that remain incomplete, mostly due
 * [Perform speedup analysis after Numba/Dask optimization](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/40)
 
 ## Code Files for Review
-There are some code files for review regarding a preliminary application of Dask and ongoing Numba implementation. Note that the plan is for the added Dask lines to the script to eventually be integrated into the StochPy source code, as soon as the errors associated with doing so are dealt with. The StochPy retrofitting/Numba implementation is ongoing. 
-* [Dask-ified Scripts](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/pull/48/files)
+Much of this sprint has been dedicated to developing plans for organizational issues and deciding how best to complete the seemingly conflicting goals of the curriculum and the client, as such little code has been produced while we have adjusted our plans. The StochPy retrofitting/Numba implementation is ongoing.
 * [Ongoing Numba Implementation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/compare/main...numba-testing)
  
 ## Retrospective Summary
@@ -41,8 +39,10 @@ Here's what went well:
  
 Here's what we'd like to improve:
    * Increasing feature implementation speed
+   * Considering the literature-heavy nature of our project, improve generation and tracking of research and development artifacts.
    * Considering the literature-heavy nature of our project, improve pace of producing testing results
   
 Here are changes we plan to implement in the next sprint:
    * Ramping up implementation speed by enforcing stricter self-defined deadlines for Sprint issues
+   * Ramping up implementation speed by directing additional resources to our most vital goal in the form of refactoring StochPy for use with Numba.
    * Keeping better track of "literature search"-esque activities for Sprint documentation purposes
