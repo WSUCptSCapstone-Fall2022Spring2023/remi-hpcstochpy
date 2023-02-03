@@ -1,0 +1,41 @@
+Related SO Page
+https://stackoverflow.com/questions/51212688/how-to-use-all-the-cpu-cores-using-dask
+
+Basic Dask Documentation
+https://docs.dask.org/en/stable/best-practices.html
+
+Dask Delayed Documentation
+https://docs.dask.org/en/stable/delayed-best-practices.html
+
+Dask Scheduling
+https://docs.dask.org/en/stable/scheduling.html
+
+Dask Dashboard
+https://docs.dask.org/en/stable/dashboard.html
+
+Official Dask Intro
+https://youtu.be/nnndxbr_Xq4
+
+Jupytr Delayed Demos
+https://youtu.be/Alwgx_1qsj4
+
+Dask Distributed Tutorial
+https://youtu.be/v7famjsXdUY
+
+Dask Installation Documentation
+https://docs.dask.org/en/stable/install.html
+
+Pandas to Dask Tutorial
+https://youtu.be/jstCmSD_LAs
+
+General Dask Tutorial
+https://youtu.be/IdsdAT8nrhI
+
+Kubernetes and Dask
+https://blog.dask.org/2022/11/09/dask-kubernetes-operator
+
+Dask Homepage
+https://www.dask.org/
+
+Recent Talk on Dask Deployment Difficulties
+https://youtu.be/5hUkUj1VYW4
