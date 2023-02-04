@@ -45,7 +45,7 @@ except ImportError:
     IS_STOCHPY_KIT = False
 
 
-spec = [
+"""spec = [
     ('X_matrix', ),
     ('timesteps', intc),
     ('starttime', float64),
@@ -56,10 +56,10 @@ spec = [
     ('last_timepoint',),
     ('seed',),
     ('quiet',),
-]
+]"""
 
 
-@jitclass(spec)
+# @jitclass(spec)
 class SSASettings():
     """   
     Input:
@@ -667,7 +667,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self._IsSimulationDone = True
                 if not quiet: print("Info: Data successfully parsed into StochPy")
 
-    def DoStochSim(self,end=False,mode=False,method=False,trajectories=False,epsilon = 0.03,IsTrackPropensities=False, rate_selection = None, species_selection = None,IsOnlyLastTimepoint = False,critical_reactions=[],reaction_orders = False,species_HORs = False,species_max_influence = False,quiet = False, use_jit = False):
+    def DoStochSim(self,end=False,mode=False,method=False,trajectories=False,epsilon = 0.03,IsTrackPropensities=False, rate_selection = None, species_selection = None,IsOnlyLastTimepoint = False,critical_reactions=[],reaction_orders = False,species_HORs = False,species_max_influence = False,quiet = False):
         """
         Run a stochastic simulation for until `end` is reached. This can be either time steps or end time (which could be a *HUGE* number of steps).
 
@@ -783,16 +783,10 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 self.settings = SSASettings(x_matrix=self.SSA.X_matrixinit,timesteps=self.sim_end,starttime=0,endtime=10**50, track_propensities=self._IsTrackPropensities, species_selection=species_selection,rate_selection = rate_selection,last_timepoint=IsOnlyLastTimepoint,seed = self._IsSeed,quiet = quiet)
 
             # Computationally expensive block. Calls Execute() in DirectMethod.py
-            if use_jit:
-                if self.sim_method_name.lower() == "tauleaping":
-                    self.SSA.jit_execute(self.settings, IsStatusBar, epsilon, critical_reactions)
-                else:
-                    self.SSA.jit_execute(self.settings, IsStatusBar)
+            if self.sim_method_name.lower() == "tauleaping":
+                self.SSA.Execute(self.settings, IsStatusBar, epsilon, critical_reactions)
             else:
-                if self.sim_method_name.lower() == "tauleaping":
-                    self.SSA.Execute(self.settings, IsStatusBar, epsilon, critical_reactions)
-                else:
-                    self.SSA.Execute(self.settings, IsStatusBar)
+                self.SSA.Execute(self.settings, IsStatusBar)
             # End computationally expensive block
 
             self.data_stochsim = IntegrationStochasticDataObj()         
@@ -1458,7 +1452,7 @@ class SSA(PlottingFunctions,PrintingFunctions):
                 file_path = "{0:s}{1:d}.txt".format(directory,n)
                 file_out = open(file_path,'w')                      
                 file_out.write("Species\tMean\n")                
-                for s_id in self.sim_species_tracked: 
+                for s_id in self.sim_species_tracked:
                     file_out.write("{0:s}\t{1:f}\n".format(s_id,self.data_stochsim.species_means[s_id])) 
                 file_out.close()
                 if not quiet:

@@ -40,7 +40,11 @@ from numba.experimental import jitclass
 ########################### END IMPORTS ##################################
 
 
-@jitclass()
+"""
+
+"""
+
+#@jitclass()
 class DirectMethod(StochPySSA_Shared):
     """
 
@@ -57,12 +61,16 @@ class DirectMethod(StochPySSA_Shared):
     def __init__(self,model_file,model_dir,IsQuiet=False):    
         self.Parse(model_file,model_dir,IsQuiet=IsQuiet)   
 
-    def jit_execute(self, settings, IsStatusBar=False):
+    def Execute(self, settings, IsStatusBar=False):
         """
         Generates a trajectory of the Markov jump process.
 
         Input:
          - *settings* (class object)
+
+         Called many times, if this function can be jit compiled, it should result in noticeable speedup.
+         References self, so will likely have to make self a jit class.
+
         """
 
         time1 = time.time()

@@ -31,7 +31,7 @@ class Species():
 __species__ = Species()
 
 
-@jitclass()
+#@jitclass()
 class StochPySSA_Shared(): 
     def Parse(self,model_file,model_dir,IsTauleaping=False,IsNRM=False,IsDelayed = False,IsSMM = False,IsQuiet=False):
         """
