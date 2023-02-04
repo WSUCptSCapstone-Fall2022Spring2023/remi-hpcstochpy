@@ -67,10 +67,70 @@ Numba types:
 
 ### DirectMethod
 
-#### Inherits StochPySSA_Shared
+#### Attributes of DirectMethod
 
-#### Constructor:
+DirectMethod does not have any unique attributes, however, mappings may have to be defined in inherited classes.
+We can potentially avoid creating mappings for inherited classes, by giving DirectMethods numba attributes that
+inherited non-numba attributes are cast too. However, I imagine this would not have ideal performance.
+
+#### Classes used by DirectMethod
+
+DirectMethod inherits StochPySSA_Shared
+
+The constructor takes in model_file, model_dir, and IsQuiet=IsQuiet.
+These maye have to be mapped and should match mappings in StochPySSA_Shared, as the Parse function is inherited from it.
+
 ```py
-def __init__(self,model_file,model_dir,IsQuiet=False):    
-    self.Parse(model_file,model_dir,IsQuiet=IsQuiet)
+def Execute(self, settings, IsStatusBar=False):
 ```
+type.
+
+#### Inherited Attributes
+
+IsStatusBar : numba boolean
+
+settings : may need to be made into jit class
+
+_IsInitial : numba boolean.
+
+sim_t : unsure
+
+X_matrix : numpy matrix
+
+fixed_species_amount : unsure
+
+timestep : numpy int
+
+sim_output : numpy array
+
+propensities_output : numpy array
+
+V_output : numpy array
+
+_IsTrackPropensities : will need to be defined in settings class
+
+randoms_log : numpy array
+
+randoms : numpy array
+
+count : numpy int
+
+sim_tau : numpy int
+
+sim_r2 : numpy int
+
+sim_a_mu : numpy array
+
+N_matrix_transpose : numpy matrix
+
+#### Functions
+
+SpeciesSelection() | inherited from StochPySSA_Shared | several datatypes to be cast or mapped, many from settings
+
+RateSelection() | inherited from StochPySSA_Shared | several datatypes to be cast or mapped, many from settings
+
+SetEvents() | inherited from class CoreToPsc(object):
+
+RunExactTimestep() | defined in DirectMethod.py itself
+
+#TODO Finish analysis of functions
