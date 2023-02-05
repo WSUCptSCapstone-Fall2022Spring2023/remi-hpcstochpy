@@ -1,12 +1,12 @@
-# Sprint 3 Report (1/9/2023 - 2/2/2023)
+# Sprint 4 Report (1/9/2023 - 2/2/2023)
 
 ## What's New
  * First draft of MVP report completed
  * Ongoing implementation of Numba features into StochPy source code
- * Further research into potential application of Dask as well as how it works
+ * Continued research into potential application of Dask as well as how it works
 
 ## Work Summary
-For Sprint 4, aside from keeping our documentation up-to-date, we have been working on implementing Numba features into StochPy to pursue our stated goals of optimizing and parallelizing the library. Progress is slow, however, as the StochPy codebase is labyrinthine, and there are numerous unusual errors that are difficult to debug. Still, progress is ongoing. Additionally, some StochPy source code has been partially retrofitted with Numba features, although it is currently in-progress and not operational, so it exists on the "numba-testing" GitHub branch. Additionally, we have uploaded some further study materials to the Sprint 4 folder from further study of Dask. 
+For Sprint 4, aside from keeping our documentation up-to-date, we have been continuing our work on implementing Numba features into StochPy. Progress is continuing steadily but slowly, as we continue to face several unusual errors that are complicated to debug as Numba features are implemented. Moreover, we are also generating design materials to create a skeleton of our approach to integrating Numba into StochPy. In summary, progress is ongoing. Additionally, some StochPy source code has been partially retrofitted with Numba features, although it is currently not operational, so it exists on the "numba-testing" GitHub branch. Finally, we have uploaded some study materials that were used in studying Dask to the text file in the Sprint 4 folder.
 
 ## Unfinished Work
 Unfinished work includes fully implementing Dask and Numba features into StochPy, along with conducting extensive testing and speedup analysis. As mentioned, this is hampered by the complexity of working within the StochPy codebase and numerous bugs caused by the smallest changes. For example, we have made attempts to integrate the Dask changes in the template example into the StochPy source code itself but are running into unusual simulation outputs and other bugs. Numba implementation into the StochPy source code is an ongoing process and faces similar errors. 
@@ -23,26 +23,26 @@ Here are links to the issues that we completed in this sprint:
 
  ## Incomplete Issues
 There are some issues assigned to this sprint that remain incomplete, mostly due to implementation being ongoing. These issues are:
-* [Use Dask to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/39)
+* [Use Dask to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/39)*
 * [Use Numba to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/44)
 * [Perform speedup analysis after Numba/Dask optimization](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/40)
 
+\*Though we have technically implemented speedup using Dask via the script files mentioned in Sprint 3, we are still researching and experimenting with how we might be able to better integrate it into StochPy, so we are leaving the issue up for now. 
+
 ## Code Files for Review
-Much of this sprint has been dedicated to developing plans for organizational issues and deciding how best to complete the seemingly conflicting goals of the curriculum and the client, as such little code has been produced while we have adjusted our plans. The StochPy retrofitting/Numba implementation is ongoing.
+Much of this sprint has been dedicated to developing plans for organizational issues and deciding how best to complete the seemingly conflicting goals of the curriculum and the client. As such, little code has been produced while we are adjusting our plans. The StochPy retrofitting/Numba implementation is ongoing, as can be seen below:
 * [Ongoing Numba Implementation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/compare/main...numba-testing)
  
 ## Retrospective Summary
 Here's what went well:
-  * Collaborating with each other in a constructive and timely manner
   * Acquiring a better understanding of the technologies we are using (Dask, Numba)
-  * Commencing modification of source code and actually implementing some Dask/Numba functionalities
+  * Collaborating with each other in a constructive and timely manner
  
 Here's what we'd like to improve:
-   * Increasing feature implementation speed
-   * Considering the literature-heavy nature of our project, improve generation and tracking of research and development artifacts.
-   * Considering the literature-heavy nature of our project, improve pace of producing testing results
+   * Increasing feature implementation speed 
+   * Considering the literature-heavy nature of our project, improve generation and tracking of research and development artifacts, along with improving the pace of producing testing results
   
 Here are changes we plan to implement in the next sprint:
-   * Ramping up implementation speed by enforcing stricter self-defined deadlines for Sprint issues
-   * Ramping up implementation speed by directing additional resources to our most vital goal in the form of refactoring StochPy for use with Numba.
-   * Keeping better track of "literature search"-esque activities for Sprint documentation purposes
+   * Ramping up implementation speed by enforcing stricter self-defined deadlines for Sprint issues and directing additional resources to our most vital goal in the form of refactoring StochPy for use with Numba
+   * Keeping better track of "literature search"-esque activities for Sprint documentation and accountability purposes
+   * Improving team communication by enforcing weekly meetings, delineating expected tasks for each week, and holding fellow team members accountable through generating tangible work artifacts
