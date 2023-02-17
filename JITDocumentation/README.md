@@ -63,7 +63,7 @@ Numba types:
 | complex64       |    c8     |        single-precision complex number |
 | complex128      |    c16    |        double-precision complex number |
 
-## Classes to JIT Compilation:
+## Classes to JIT Compile:
 
 ### DirectMethod
 
@@ -83,7 +83,6 @@ These maye have to be mapped and should match mappings in StochPySSA_Shared, as 
 ```py
 def Execute(self, settings, IsStatusBar=False):
 ```
-type.
 
 #### Inherited Attributes
 
@@ -133,4 +132,31 @@ SetEvents() | inherited from class CoreToPsc(object):
 
 RunExactTimestep() | defined in DirectMethod.py itself
 
-#TODO Finish analysis of functions
+### StochPySSA_Shared
+
+#### Functions
+```py
+def Parse(self,model_file,model_dir,IsTauleaping=False,IsNRM=False,IsDelayed = False,IsSMM = False,IsQuiet=False):
+```
+Parses the PySCeS MDL input file, where the model is described.
+
+## Computational Complexity Testing
+
+| Function           | number of executions |  total time in seconds |
+|--------------------|:--------------------:|-----------------------:|
+| Parse              |          1           |   0.017735004425048828 |
+| SpeciesSelection   |          1           |  7.152557373046875e-07 |
+| RateSelection      |          1           |   4.76837158203125e-07 |
+| SetEvents          |          1           |    5.7220458984375e-06 |
+| Propensities       |       1000000        |      9.819483518600464 |
+| BuildPropensities  |          0           |                      0 |
+| HandleEvents       |        999999        |    0.37389135360717773 |
+| AssignmentRules    |          0           |                      0 |
+| rateFuncCall       |       1000000        |     1.3657846450805664 |
+| Initial_Conditions |          1           | 1.049041748046875e-05  |
+
+The Propensities Function is then clearly the most computationally expensive in this test.
+rateFuncCall also takes a significant amount of time.
+These are only the functions defined in StochPySSA_shared.
+The total time of DirectMethod was 26.70078182220459 seconds for this test. So about half of the computation time
+is unnacounted for in this test. Likely it is the result of functions defined in DirectMethod itself.

@@ -32,7 +32,30 @@ __species__ = Species()
 
 
 #@jitclass()
-class StochPySSA_Shared(): 
+class StochPySSA_JIT():
+
+    ParseCallCount = 0
+    SpeciesSelectionCallCount = 0
+    RateSelectionCallCount = 0
+    SetEventsCallCount = 0
+    PropensitiesCallCount = 0
+    BuildPropensityCodesCallCount = 0
+    HandleEventsCallCount = 0
+    AssignmentRulesCallCount = 0
+    rateFuncCallCount = 0
+    Initial_ConditionsCallCount = 0
+
+    ParseTime = 0
+    SpeciesSelectionTime = 0
+    RateSelectionTime = 0
+    SetEventsTime = 0
+    PropensitiesTime = 0
+    BuildPropensityCodesTime = 0
+    HandleEventsTime = 0
+    AssignmentRulesTime = 0
+    rateFuncTime = 0
+    Initial_ConditionsTime = 0
+
     def Parse(self,model_file,model_dir,IsTauleaping=False,IsNRM=False,IsDelayed = False,IsSMM = False,IsQuiet=False):
         """
         Parses the PySCeS MDL input file, where the model is desribed
@@ -40,8 +63,10 @@ class StochPySSA_Shared():
         Input:
         - *model_file* filename.psc
         - *model_dir*  /home/user/Stochpy/pscmodels/filename.psc        
-        """        
-        try:               
+        """
+        self.ParseCallCount += 1
+        t1 = time.time()
+        try:
             self.parse = PySCeS_Connector(model_file,model_dir,IsTauleaping = IsTauleaping, IsNRM = IsNRM,IsDelayed = IsDelayed,IsSMM = IsSMM,IsQuiet=IsQuiet)	# Parse model          
             if self.parse._IsConverted:
                 model_file += '.psc'
@@ -77,30 +102,39 @@ class StochPySSA_Shared():
             print(er)
             print("Error: StochPy failed parsing input file '{0:s}' from directory '{1:s}'".format(model_file, model_dir) )
             sys.exit()
+        self.ParseTime += time.time() - t1
             
             
     def SpeciesSelection(self):
         """ Prepare output indices (if specific species are selected) - not computationally expensive """
-        self._IsSpeciesSelection = False    
+        self.SpeciesSelectionCallCount += 1
+        t1 = time.time()
+        self._IsSpeciesSelection = False
         if self.settings.species_selection:
             self.sim_output_indices = [0]
             for s_id in self.settings.species_selection:
                 self.sim_output_indices.append(self.species_pos[s_id] + 1) # (time on first index)
             self.sim_output_indices.append(-1)
             self._IsSpeciesSelection = True
+        self.SpeciesSelectionTime += time.time() - t1
             
     def RateSelection(self):
         """ Prepare output indices (if specific rates are selected) """
+        self.RateSelectionCallCount += 1
+        t1 = time.time()
         self._IsRateSelection = False    
         if self.settings.rate_selection:
             self.rate_output_indices = [0]
             for r_id in self.settings.rate_selection:
                 self.rate_output_indices.append(self.rate_pos[r_id] + 1) # (time on first index)            
             self._IsRateSelection = True
+        self.RateSelectionTime += time.time() - t1
             
 
     def SetEvents(self):
         """ Initialize events """
+        self.SetEventsCallCount += 1
+        t1 = time.time()
         self.__events__ = copy.deepcopy(self.parse.Mod.__events__)  # deepcopy, very important! Augustus 21, 2014
         self._IsPerformEvent = False    
         for ev in self.__events__:            
@@ -108,6 +142,7 @@ class StochPySSA_Shared():
                 if s_id not in self.fixed_species:               
                     ev.code_string = ev.code_string.replace('self.mod.{0:s}'.format(s_id),'X_matrix[{0:d}]'.format(self.species_pos[s_id]) )
             ev.xcode = compile("self.state = {0:s}".format(ev.code_string),'event{0}'.format(ev),'exec')
+        self.SetEventsTime += time.time() - t1
             
 
     def Propensities(self,IsTauleaping=False):
@@ -117,6 +152,8 @@ class StochPySSA_Shared():
         Input:
          - *IsTauleaping* (boolean) [default = False]
         """
+        self.PropensitiesCallCount += 1
+        t1 = time.time()
         if self._IsInitial:
             code_str = self.volume_code + '\n'                                # 27-01-2014                     
             self.sim_a_mu = np.zeros([self.n_reactions])                      # Initialize a(mu)
@@ -137,6 +174,7 @@ class StochPySSA_Shared():
         assert self.sim_a_mu.min() >= 0, "Error: Negative propensities are found. Make sure that your rate equations are defined correctly!"
         self.sim_a_mu = abs(self.sim_a_mu)
         self.sim_a_0 = self.sim_a_mu.sum()
+        self.PropensitiesTime += time.time() - t1
         
         
     def BuildPropensityCodes(self, propensities = None): # 21-11-2013 
@@ -145,7 +183,9 @@ class StochPySSA_Shared():
            
         Input: 
          - *propensities*: optional argument for providing the propensities that should be pre-compiled. If none, *self.propensities* is used.
-        """        
+        """
+        self.BuildPropensityCodesCallCount += 1
+        t1 = time.time()
         #Note2: This assumes that own reaction index is already inserted in the dep_graph.         
         if not propensities: #26-11-2013
             propensities = self.parse.propensities
@@ -158,6 +198,7 @@ class StochPySSA_Shared():
         code_str_all = self.volume_code + '\n'
         code_str_all += '\n'.join(['r_vec[{0:d}]={1:s}'.format(i,propensity) for i,propensity in enumerate(propensities)])        
         self.propensity_codes.append(compile(code_str_all,"PropensityEvalAllCode","exec"))
+        self.BuildPropensityCodesTime += time.time() - t1
         
     
     def HandleEvents(self,IsTauleapingStep=False):    
@@ -167,7 +208,9 @@ class StochPySSA_Shared():
         We distuingish two types of events:
         1. time events where we reset the simulation time to the trigger time
         2. trigger events which can involve species copy numbers, ..., ..., and also time.         
-        """        
+        """
+        t1 = time.time()
+        self.HandleEventsCallCount += 1
         self._IsPerformEvent = False
         for ev in self.__events__:            
             IsTrigger = ev(self.sim_t,self.X_matrix)           
@@ -209,13 +252,16 @@ class StochPySSA_Shared():
 
                     self._IsPerformEvent = True      # SBML event          
                     self.reaction_index = np.nan
+        self.HandleEventsTime += time.time() - t1
                             
     def AssignmentRules(self):
         """ 
         Builds the assignment rules # updated version 06/08/14
         
         http://sbml.org/Software/libSBML/docs/java-api/org/sbml/libsbml/AssignmentRule.html        
-        """ 
+        """
+        self.AssignmentRulesCallCount += 1
+        t1 = time.time()
         code_string = """"""
         if self.sim_t == 0:
             self.assignment_labels = list(self.__aDict__)
@@ -235,6 +281,7 @@ class StochPySSA_Shared():
         for i,species in enumerate(self.__aDict__):
             code_string += "self.assignment_species[{0:d}]={1}\n".format(i,self.__aDict__[species]['formula'])       
         self.rateFunc(code_string,self.assignment_species)
+        self.AssignmentRulesTime += time.time() - t1
         
 
     def rateFunc(self,rate_eval_code,r_vec):
@@ -245,16 +292,21 @@ class StochPySSA_Shared():
          - *rate_eval_code* compiled rate equations
          - *r_vec* output for the calculated propensities
         """
+        self.rateFuncCallCount += 1
+        t1 = time.time()
         try:        
             exec(rate_eval_code)     
         except Exception as er:
             print(er)
             print("Error: Propensities cannot be determined. Please check if all variable species amounts are initialized")
-            sys.exit()       
+            sys.exit()
+        self.rateFuncTime += time.time() - t1
                  
             
     def Initial_Conditions(self,IsTauleaping = False):              
-        """ This function initiates the output format with the initial concentrations """               
+        """ This function initiates the output format with the initial concentrations """
+        self.Initial_ConditionsCallCount += 1
+        t1 = time.time()
         if self._IsTrackPropensities:              
             output_init = self.sim_a_mu.tolist()
             output_init.insert(0,self.sim_t)
@@ -281,6 +333,7 @@ class StochPySSA_Shared():
             output_init = [output_init[i] for i in self.sim_output_indices]
         self.sim_output.append(output_init)        
         self.V_output = [self._current_volume] # May 26, 2015
+        self.Initial_ConditionsTime += time.time() - t1
         
         
     def GenerateOutput(self,IsTauleaping = False,completion_delayed = False):
@@ -292,7 +345,7 @@ class StochPySSA_Shared():
          - *completion_delayed* (boolean) [default = False]
          
         Different output is generated for the tauleaping method and if there are completion delays        
-        """        
+        """
         if completion_delayed:
             r_index = - (self.reaction_index + 1)                              # Completion reaction = - reaction index
         if not completion_delayed and not IsTauleaping:
@@ -319,4 +372,4 @@ class StochPySSA_Shared():
             output_step.insert(0,self.sim_t)
             if self._IsRateSelection:
                 output_step = [output_step[j] for j in self.rate_output_indices]
-            self.propensities_output.append(output_step) 
+            self.propensities_output.append(output_step)

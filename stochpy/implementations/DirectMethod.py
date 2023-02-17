@@ -34,6 +34,7 @@ __doc__ = """
 
 import sys,copy,time,os,operator, numpy
 from .StochPyTools import __species__,StochPySSA_Shared,np
+from .StochPyTools_JIT import StochPySSA_JIT,np
 from numba import jit
 from numba.experimental import jitclass
     
@@ -45,7 +46,7 @@ from numba.experimental import jitclass
 """
 
 #@jitclass()
-class DirectMethod(StochPySSA_Shared):
+class DirectMethod(StochPySSA_JIT):
     """
 
     Direct Stochastic Simulation Algorithm from Gillespie (1977) [1].
@@ -146,6 +147,18 @@ class DirectMethod(StochPySSA_Shared):
 
         time2 = time.time()
         print("Direct Method Execute time: ", time2 - time1, " seconds")
+        print(
+            "Parse called ", self.ParseCallCount, " times. With total time ", self.ParseTime, "\n",
+            "SpeciesSelection called ", self.SpeciesSelectionCallCount, " times. With total time ", self.SpeciesSelectionTime, "\n",
+            "RateSelection called ", self.RateSelectionCallCount, " times. With total time ", self.RateSelectionTime, "\n",
+            "SetEvents called ", self.SetEventsCallCount, " times. With total time ", self.SetEventsTime, "\n",
+            "Propensities called ", self.PropensitiesCallCount, " times. With total time ", self.PropensitiesTime, "\n",
+            "BuildPropensities called ", self.BuildPropensityCodesCallCount, " times. With total time ", self.BuildPropensityCodesTime, "\n",
+            "HandleEvents called ", self.HandleEventsCallCount, " times. With total time ", self.HandleEventsTime, "\n",
+            "AssignmentRules called ", self.AssignmentRulesCallCount, " times. With total time ", self.AssignmentRulesTime, "\n",
+            "rateFuncCall called ", self.rateFuncCallCount, " times. With total time ", self.rateFuncTime, "\n",
+            "Initial_Conditions called ", self.Initial_ConditionsCallCount, " times. With total time ", self.Initial_ConditionsTime, "\n",
+        )
 
     def RunExactTimestep(self):
         """ Calculates a time step of the Direct Method """ 
