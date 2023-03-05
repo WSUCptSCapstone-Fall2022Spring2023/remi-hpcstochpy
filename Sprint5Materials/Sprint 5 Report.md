@@ -2,14 +2,14 @@
 
 ## What's New
  * Second draft of MVP report completed
+ * Completion of solution architecting
  * Ongoing implementation of Numba features into StochPy source code
- * Continued research into potential application of Dask as well as how it works
 
 ## Work Summary
-For Sprint 5, aside from keeping our documentation up-to-date, we have been continuing our work on implementing Numba features into StochPy. Progress is continuing steadily but slowly, as we continue to face several unusual errors that are complicated to debug as Numba features are implemented. Moreover, we are also generating design materials to create a skeleton of our approach to integrating Numba into StochPy. In summary, progress is ongoing. Additionally, some StochPy source code has been partially retrofitted with Numba features, although it is currently not operational, so it exists on the "numba-testing" GitHub branch. Finally, we have uploaded some study materials that were used in studying Dask to the text file in the Sprint 5 folder.
+For Sprint 5, aside from keeping our documentation up-to-date, we have continued to work on implementing Numba features into StochPy. Progress is continuing steadily but slowly, as our planning and analysis activities are completed, but we still continue to face difficult implementation challenges with Numba. We're continuing to put work into integrating Numba functions into StochPy, but there is the looming concern that Numba implementation would be impossible to achieve for StochPy--in which case, we'd fall back to our Dask version and refining it. Still, as already stated, we're committing fully to getting Numba to work, and our current implementation progress can be seen in the numba-testing class. 
 
 ## Unfinished Work
-Unfinished work includes fully implementing Dask and Numba features into StochPy, along with conducting extensive testing and speedup analysis. As mentioned, this is hampered by the complexity of working within the StochPy codebase and numerous bugs caused by the smallest changes. For example, we have made attempts to integrate the Dask changes in the template example into the StochPy source code itself but are running into unusual simulation outputs and other bugs. Numba implementation into the StochPy source code is an ongoing process and faces similar errors. 
+Unfinished work includes fully implementing Dask and Numba features into StochPy, along with conducting speedup testing on StochPy once this is completed. As mentioned, the implementation is hampered by the complexity of working within the StochPy codebase and numerous bugs caused by the smallest changes, along with errors that are nearly impossible to deduce the cause of. The StochPy library continues to throw many errors as we try to implement Numba functionality into it, but we still continue to work towards it. 
 
 ## Completed Issues
 Here are links to the issues that we completed in this sprint:
@@ -29,22 +29,21 @@ There are some issues assigned to this sprint that remain incomplete, mostly due
 * [Use Numba to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/44)
 * [Perform speedup analysis after Numba/Dask optimization](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/40)
 
-\*Though we have technically implemented speedup using Dask via the script files mentioned in Sprint 3, we are still researching and experimenting with how we might be able to better integrate it into StochPy, so we are leaving the issue up for now. 
+\* While we have a working Dask version, we are working on getting it directly integrated into StochPy. So, it remains as an "incomplete" issue.
 
 ## Code Files for Review
-Much of this sprint has been dedicated to developing plans for organizational issues and deciding how best to complete the seemingly conflicting goals of the curriculum and the client. As such, little code has been produced while we are adjusting our plans. The StochPy retrofitting/Numba implementation is ongoing, as can be seen below:
+Much of this sprint has been dedicated to developing plans for implementation details, along with some limited implementation. The StochPy retrofitting/Numba implementation is ongoing, as can be seen below:
 * [Ongoing Numba Implementation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/compare/main...numba-testing)
  
 ## Retrospective Summary
 Here's what went well:
   * Acquiring a better understanding of the technologies we are using (Dask, Numba)
-  * Collaborating with each other in a constructive and timely manner
+  * Communicating with our faculty mentor to clarify expectations and acquire work
  
 Here's what we'd like to improve:
-   * Increasing feature implementation speed 
-   * Considering the literature-heavy nature of our project, improve generation and tracking of research and development artifacts, along with improving the pace of producing testing results
+   * Accelerating implementation speed
+   * Communicating with team members and setting clear work expectations
   
 Here are changes we plan to implement in the next sprint:
    * Ramping up implementation speed by enforcing stricter self-defined deadlines for Sprint issues and directing additional resources to our most vital goal in the form of refactoring StochPy for use with Numba
-   * Keeping better track of "literature search"-esque activities for Sprint documentation and accountability purposes
-   * Improving team communication by enforcing weekly meetings, delineating expected tasks for each week, and holding fellow team members accountable through generating tangible work artifacts
+   * More frequent communication, 
