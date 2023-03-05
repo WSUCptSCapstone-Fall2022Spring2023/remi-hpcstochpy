@@ -30,23 +30,29 @@ __doc__ = """
           [1] Gillespie D.T (1977), "Exact stochastic simulation of coupled chemical reactions", J.Phys. Chem. 81:2340-2361
           [2] Wilkinson D.J (2009), "Stochastic Modelling for quantitative description of heterogeneous biological systems", Nat Rev Genet; 0(2):122-133
           """
+
 ############################# IMPORTS ####################################
 
-import sys,copy,time,os,operator, numpy
-from .StochPyTools import __species__,StochPySSA_Shared,np
-from .StochPyTools_JIT import StochPySSA_JIT,np
-from numba import jit
+import sys, copy, time, os, operator, numpy
+from .StochPyTools import __species__, StochPySSA_Shared, np
+from .StochPyTools_JIT import StochPySSA_JIT, np
 from numba.experimental import jitclass
-    
+from numba import boolean, int32
+
 ########################### END IMPORTS ##################################
 
+spec = [
+    ('IsStatusBar', boolean),
+    ('_IsInitial', boolean),
+    ('timestep', int32),
+    ('count', int32),
+    ('sim_tau', int32),
+    ('sim_r2', int32)
+]
 
-"""
 
-"""
-
-#@jitclass()
-class DirectMethod(StochPySSA_JIT):
+@jitclass(spec)
+class DirectMethod(StochPySSA_Shared):
     """
 
     Direct Stochastic Simulation Algorithm from Gillespie (1977) [1].
@@ -59,8 +65,9 @@ class DirectMethod(StochPySSA_JIT):
      - *model_file* filename.psc
      - *model_dir* /home/user/Stochpy/pscmodels/filename.psc   
     """
-    def __init__(self,model_file,model_dir,IsQuiet=False):    
-        self.Parse(model_file,model_dir,IsQuiet=IsQuiet)   
+
+    def __init__(self, model_file, model_dir, IsQuiet=False):
+        self.Parse(model_file, model_dir, IsQuiet=IsQuiet)
 
     def Execute(self, settings, IsStatusBar=False):
         """
@@ -147,51 +154,39 @@ class DirectMethod(StochPySSA_JIT):
 
         time2 = time.time()
         print("Direct Method Execute time: ", time2 - time1, " seconds")
-        print(
-            "Parse called ", self.ParseCallCount, " times. With total time ", self.ParseTime, "\n",
-            "SpeciesSelection called ", self.SpeciesSelectionCallCount, " times. With total time ", self.SpeciesSelectionTime, "\n",
-            "RateSelection called ", self.RateSelectionCallCount, " times. With total time ", self.RateSelectionTime, "\n",
-            "SetEvents called ", self.SetEventsCallCount, " times. With total time ", self.SetEventsTime, "\n",
-            "Propensities called ", self.PropensitiesCallCount, " times. With total time ", self.PropensitiesTime, "\n",
-            "BuildPropensities called ", self.BuildPropensityCodesCallCount, " times. With total time ", self.BuildPropensityCodesTime, "\n",
-            "HandleEvents called ", self.HandleEventsCallCount, " times. With total time ", self.HandleEventsTime, "\n",
-            "AssignmentRules called ", self.AssignmentRulesCallCount, " times. With total time ", self.AssignmentRulesTime, "\n",
-            "rateFuncCall called ", self.rateFuncCallCount, " times. With total time ", self.rateFuncTime, "\n",
-            "Initial_Conditions called ", self.Initial_ConditionsCallCount, " times. With total time ", self.Initial_ConditionsTime, "\n",
-        )
 
     def RunExactTimestep(self):
-        """ Calculates a time step of the Direct Method """ 
+        """ Calculates a time step of the Direct Method """
         if self.sim_t == 0:
-            randoms = np.random.random(1000) 
-            self.randoms_log = np.log(randoms)*-1
+            randoms = np.random.random(1000)
+            self.randoms_log = np.log(randoms) * -1
             self.randoms = np.random.random(1000)
-            self.count = 0           
+            self.count = 0
         elif self.count == 1000:
-            randoms = np.random.random(1000) 
-            self.randoms_log = np.log(randoms)*-1
-            self.randoms = np.random.random(1000)    
-            self.count = 0      
-        
-        self.sim_tau = self.randoms_log[self.count]/float(self.sim_a_0)       # reaction time generation
-        self.sim_r2 = self.randoms[self.count]                                # Draw random number 2 [0-1]
-        self.count +=1
-        
+            randoms = np.random.random(1000)
+            self.randoms_log = np.log(randoms) * -1
+            self.randoms = np.random.random(1000)
+            self.count = 0
+
+        self.sim_tau = self.randoms_log[self.count] / float(self.sim_a_0)  # reaction time generation
+        self.sim_r2 = self.randoms[self.count]  # Draw random number 2 [0-1]
+        self.count += 1
+
         if (self.sim_t + self.sim_tau) < self.settings.endtime:
-            self.sim_t += self.sim_tau                                        # Time update
+            self.sim_t += self.sim_tau  # Time update
             self.reaction_index = 0
             sum_of_as = self.sim_a_mu[self.reaction_index]
-            criteria = self.sim_r2*self.sim_a_0
-            while sum_of_as < criteria:                                       # Use r2 to determine which reaction will occur
-                self.reaction_index += 1	                                  # Index
-                sum_of_as += self.sim_a_mu[self.reaction_index]                 
+            criteria = self.sim_r2 * self.sim_a_0
+            while sum_of_as < criteria:  # Use r2 to determine which reaction will occur
+                self.reaction_index += 1  # Index
+                sum_of_as += self.sim_a_mu[self.reaction_index]
 
             try:
                 self.X_matrix += self.N_matrix_transpose[self.reaction_index]
                 self.timestep += 1
             except MemoryError as ex:
                 print(ex)
-                sys.exit()               
-        else:            
-            self.sim_t = self.settings.endtime            
+                sys.exit()
+        else:
+            self.sim_t = self.settings.endtime
             self.reaction_index = np.nan

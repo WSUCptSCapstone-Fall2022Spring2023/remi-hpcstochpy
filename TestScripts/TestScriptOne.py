@@ -1,7 +1,7 @@
 import time
 import stochpy
 
-#times a simple simulation
+# times a simple simulation
 smod = stochpy.SSA()
 start_time = time.time()
 smod.DoStochSim(trajectories=1, end=1000000, mode='steps')
