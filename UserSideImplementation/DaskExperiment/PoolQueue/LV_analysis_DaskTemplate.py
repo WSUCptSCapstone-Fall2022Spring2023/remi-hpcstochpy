@@ -10,7 +10,7 @@ import pylab as pl
 import numpy as numpy
 from dask import delayed # Import delay decorator from Dask
 
-workingdir = r"C:\Users\McNaughton\Desktop\DaskExperiment\PoolQueue" # This is an issue believed to be unique to me
+workingdir = r"C:\Users\McNaughton\Desktop\423GitRepo\remi-hpcstochpy\UserSideImplementation\DaskExperiment\PoolQueue" # This is an issue believed to be unique to me
 
 # General simulation parameters
 start_time = 0.0
@@ -59,8 +59,8 @@ def LVPoolRun(model,iteration):
     PoolMean[iteration,1] = numpy.mean(PoolPredator[:,iteration])
     PoolMean[iteration,2] = numpy.mean(PoolTotal[:,iteration])
     
-
-for i in range(0,n_runs):
+x = LVPoolRun(LVpool, 0)
+for i in range(1,n_runs):
 	x = x + LVPoolRun(LVpool,i)
 	print("LV Pool Iteration %i of %i" % (i+1,n_runs))
 
