@@ -10,12 +10,12 @@ import pylab as pl
 import numpy as numpy
 from dask import delayed # Import delay decorator from Dask
 
-workingdir = r"C:\Users\McNaughton\Desktop\DaskExperiment\PoolQueue" # This is a unique to me issue
+workingdir = r"C:\Users\McNaughton\Desktop\423GitRepo\remi-hpcstochpy\UserSideImplementation\DaskExperiment\PoolQueue" # This is a unique to me issue
 
 # General simulation parameters
 start_time = 0.0
 end_time = 100
-n_runs = 2500
+n_runs = 10
 
 ######################################
 # Pool-based Birth/Death of Predator #
