@@ -15,7 +15,7 @@ workingdir = r"C:\Users\McNaughton\Desktop\423GitRepo\remi-hpcstochpy\UserSideIm
 # General simulation parameters
 start_time = 0.0
 end_time = 100
-n_runs = 10
+n_runs = 1000
 
 ######################################
 # Pool-based Birth/Death of Predator #
@@ -120,7 +120,7 @@ for i in range(0,n_runs):
 	LVQueueRun(LVqueue,i)
 	print("LV Queue Iteration %i of %i" % (i+1,n_runs))
 
-os.chdir(workingdir) #MJ
+#os.chdir(workingdir) #MJ
 numpy.savetxt('QueuePrey.csv',QueuePrey,delimiter=',',header="Prey",comments='')
 numpy.savetxt('QueuePredator.csv',QueuePredator,delimiter=',',header="Predator",comments='')
 numpy.savetxt('QueueTotal.csv',QueueTotal,delimiter=',',header="TotalN",comments='')
@@ -139,5 +139,5 @@ detLV = pysces.model('LVpool.psc', dir=workingdir)
 detLV.doSim(end=end_time,points=end_time*10)
 detLVTS = detLV.data_sim.getSpecies()
 detLVHead = "Time," + ','.join(detLV.species)
-os.chdir(workingdir)
+#os.chdir(workingdir)
 numpy.savetxt('LVDeterministic.csv',detLVTS,delimiter=',',header=detLVHead,comments='')

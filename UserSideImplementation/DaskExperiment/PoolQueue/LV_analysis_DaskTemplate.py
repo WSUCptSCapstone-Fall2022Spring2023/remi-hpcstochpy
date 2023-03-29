@@ -15,7 +15,7 @@ workingdir = r"C:\Users\McNaughton\Desktop\DaskExperiment\PoolQueue" # This is a
 # General simulation parameters
 start_time = 0.0
 end_time = 100
-n_runs = 2500
+n_runs = 1000
 
 ######################################
 # Pool-based Birth/Death of Predator #
@@ -61,9 +61,11 @@ def LVPoolRun(model,iteration):
     
 
 for i in range(0,n_runs):
-	LVPoolRun(LVpool,i)
+	x = x + LVPoolRun(LVpool,i)
 	print("LV Pool Iteration %i of %i" % (i+1,n_runs))
 
+x.compute()
+os.chdir(workingdir) #MJ
 numpy.savetxt('PoolPrey.csv',PoolPrey,delimiter=',',header="",comments='')
 numpy.savetxt('PoolPredator.csv',PoolPredator,delimiter=',',header="",comments='')
 numpy.savetxt('PoolTotal.csv',PoolTotal,delimiter=',',header="",comments='')
@@ -137,5 +139,5 @@ detLV = pysces.model('LVpool.psc', dir=workingdir)
 detLV.doSim(end=end_time,points=end_time*10)
 detLVTS = detLV.data_sim.getSpecies()
 detLVHead = "Time," + ','.join(detLV.species)
-os.chdir(workingdir)
+#os.chdir(workingdir)
 numpy.savetxt('LVDeterministic.csv',detLVTS,delimiter=',',header=detLVHead,comments='')
