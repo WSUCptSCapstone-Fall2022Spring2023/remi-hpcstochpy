@@ -2,7 +2,6 @@ import numpy as np
 from numba import njit
 import time
 
-
 # Parameter Values
 prey = 6
 predator = 3
@@ -52,15 +51,15 @@ def Simulation(t, Prey, Predator) -> None:
             Predator -= 1
         elif(random_reaction > rates[0] + rates[1] + rates[2] + rates[3]):
             Predator += 1
-
+    
     print(t, Prey, Predator)
 
 start = time.time()
-for i in range(100000):
+for i in range(10000):
     Simulation(0, 6, 3)
+    print("Simulation %i of %i complete" % (i+1, 10000))
 end = time.time()
 print(end - start)
-
 
 #reactions for reference
 # # Prey Reactions
