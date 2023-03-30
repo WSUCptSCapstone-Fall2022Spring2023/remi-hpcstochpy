@@ -2,6 +2,7 @@ import numpy as np
 from numba import njit
 import time
 
+
 # Parameter Values
 prey = 6
 predator = 3
@@ -15,13 +16,9 @@ K_predator = 15
 end_time = 100
 
 @njit
-def Simulation(t : np.array, preyc : np.array, predc : np.array) -> None:
+def Simulation(t, Prey, Predator) -> None:
     #simulation
-    while t[-1] < end_time:
-
-        #get current count of prey and predator
-        Prey = preyc[-1]
-        Predator = predc[-1]
+    while t < end_time:
 
         #calculate rates for events
         rates = np.array([Prey*Predator*beta, Prey*alpha*(1-(Prey/K_prey)),
@@ -37,46 +34,32 @@ def Simulation(t : np.array, preyc : np.array, predc : np.array) -> None:
 
         tau = np.random.exponential(scale=1/rates_sum)
 
-        #add new timestep
-        t = np.append(t, t[-1] + tau)
+        #update timestep
+        t += tau
 
         #determine reaction
         random_number = np.random.uniform(0,1)
         random_reaction = random_number*rates_sum
 
+        #handle reaction
         if(random_reaction < rates[0]):
-            preyc = np.append(preyc, preyc[-1] - 1)
-            predc = np.append(predc, predc[-1])
+            Prey -= 1
         elif(random_reaction > rates[0] and random_reaction < rates[0] + rates[1]):
-            preyc = np.append(preyc, preyc[-1] + 1)
-            predc = np.append(predc, predc[-1])
+            Prey += 1
         elif(random_reaction > rates[0] + rates[1] and random_reaction < rates[0] + rates[1] + rates[2]):
-            predc = np.append(predc, predc[-1] + 1)
-            preyc = np.append(preyc, preyc[-1])
+            Predator += 1
         elif(random_reaction > rates[0] + rates[1] + rates[2] and random_reaction < rates[0] + rates[1] + rates[2] + rates[3]):
-            predc = np.append(predc, predc[-1] - 1)
-            preyc = np.append(preyc, preyc[-1])
+            Predator -= 1
         elif(random_reaction > rates[0] + rates[1] + rates[2] + rates[3]):
-            predc = np.append(predc, predc[-1] + 1)
-            preyc = np.append(preyc, preyc[-1])
+            Predator += 1
 
-    # print(t[-1])
-    # print(preyc[-1])
-    # print(predc[-1])
-    print("Simulated")
+    print(t, Prey, Predator)
 
 start = time.time()
-for i in range(500):
-    Simulation(np.array(0), np.array(prey), np.array(predator))
+for i in range(100000):
+    Simulation(0, 6, 3)
 end = time.time()
 print(end - start)
-
-
-
-
-
-
-
 
 
 #reactions for reference
