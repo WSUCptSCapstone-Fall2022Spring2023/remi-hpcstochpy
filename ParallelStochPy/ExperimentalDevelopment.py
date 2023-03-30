@@ -1,7 +1,6 @@
-import numpy
-import random
+import numpy as np
 from numba import njit
-from dask import delayed
+import time
 
 # Parameter Values
 prey = 6
@@ -15,8 +14,8 @@ K_prey = 10
 K_predator = 15
 end_time = 100
 
-@delayed
-def Simulation(t, preyc, predc) -> None:
+@njit
+def Simulation(t : np.array, preyc : np.array, predc : np.array) -> None:
     #simulation
     while t[-1] < end_time:
 
@@ -25,50 +24,52 @@ def Simulation(t, preyc, predc) -> None:
         Predator = predc[-1]
 
         #calculate rates for events
-        rates = [Prey*Predator*beta, Prey*alpha*(1-(Prey/K_prey)),
+        rates = np.array([Prey*Predator*beta, Prey*alpha*(1-(Prey/K_prey)),
                 Predator*Prey*delta*(1-(Predator/K_predator)),
-                Predator*gamma*(1-(Predator/K_predator)), Predator*mu*(1-(Predator/K_predator))]
+                Predator*gamma*(1-(Predator/K_predator)), Predator*mu*(1-(Predator/K_predator))])
         
         #sum of rates for determining tau
-        rates_sum = sum(rates)
+        rates_sum = np.sum(rates)
 
         #determine tau
         if(rates_sum == 0):
             break
-        tau = numpy.random.exponential(scale=1/rates_sum)
+
+        tau = np.random.exponential(scale=1/rates_sum)
 
         #add new timestep
-        t.append(t[-1] + tau)
+        t = np.append(t, t[-1] + tau)
 
         #determine reaction
-        random_number = random.uniform(0,1)
+        random_number = np.random.uniform(0,1)
         random_reaction = random_number*rates_sum
 
         if(random_reaction < rates[0]):
-            preyc.append(preyc[-1] - 1)
-            predc.append(predc[-1])
+            preyc = np.append(preyc, preyc[-1] - 1)
+            predc = np.append(predc, predc[-1])
         elif(random_reaction > rates[0] and random_reaction < rates[0] + rates[1]):
-            preyc.append(preyc[-1] + 1)
-            predc.append(predc[-1])
+            preyc = np.append(preyc, preyc[-1] + 1)
+            predc = np.append(predc, predc[-1])
         elif(random_reaction > rates[0] + rates[1] and random_reaction < rates[0] + rates[1] + rates[2]):
-            predc.append(predc[-1] + 1)
-            preyc.append(preyc[-1])
+            predc = np.append(predc, predc[-1] + 1)
+            preyc = np.append(preyc, preyc[-1])
         elif(random_reaction > rates[0] + rates[1] + rates[2] and random_reaction < rates[0] + rates[1] + rates[2] + rates[3]):
-            predc.append(predc[-1] - 1)
-            preyc.append(preyc[-1])
+            predc = np.append(predc, predc[-1] - 1)
+            preyc = np.append(preyc, preyc[-1])
         elif(random_reaction > rates[0] + rates[1] + rates[2] + rates[3]):
-            predc.append(predc[-1] + 1)
-            preyc.append(preyc[-1])
+            predc = np.append(predc, predc[-1] + 1)
+            preyc = np.append(preyc, preyc[-1])
 
-    print(t[-1])
-    print(preyc[-1])
-    print(predc[-1])
+    # print(t[-1])
+    # print(preyc[-1])
+    # print(predc[-1])
+    print("Simulated")
 
-x = Simulation([0], [prey], [predator])
-for i in range(1000):
-    x = x + Simulation([0], [prey], [predator])
-    print("simulated")
-x.compute()
+start = time.time()
+for i in range(500):
+    Simulation(np.array(0), np.array(prey), np.array(predator))
+end = time.time()
+print(end - start)
 
 
 
