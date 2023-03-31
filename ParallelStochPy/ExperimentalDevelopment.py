@@ -1,5 +1,6 @@
 import numpy as np
 from numba import njit
+import dask
 import time
 
 # Parameter Values
@@ -52,7 +53,7 @@ def Simulation(t, Prey, Predator) -> None:
         elif(random_reaction > rates[0] + rates[1] + rates[2] + rates[3]):
             Predator += 1
     
-    print(t, Prey, Predator)
+    #print(t, Prey, Predator)
 
 start = time.time()
 for i in range(10000):
