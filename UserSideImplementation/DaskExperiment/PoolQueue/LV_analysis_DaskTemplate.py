@@ -8,7 +8,7 @@ import os
 import stochpy
 import pylab as pl
 import numpy as numpy
-from dask import delayed # Import delay decorator from Dask
+import dask # Import delay decorator from Dask
 
 workingdir = r"C:\Users\McNaughton\Desktop\423GitRepo\remi-hpcstochpy\UserSideImplementation\DaskExperiment\PoolQueue" # This is an issue believed to be unique to me
 
@@ -30,7 +30,6 @@ PoolExtinction = numpy.empty([n_runs,3])
 PoolMedian = numpy.empty([n_runs,3])
 PoolMean = numpy.empty([n_runs,3])
 
-@delayed # Add decorator to any function definition
 def LVPoolRun(model,iteration):
     model.Endtime(end_time)
     model.DoStochSim()
@@ -59,12 +58,12 @@ def LVPoolRun(model,iteration):
     PoolMean[iteration,1] = numpy.mean(PoolPredator[:,iteration])
     PoolMean[iteration,2] = numpy.mean(PoolTotal[:,iteration])
     
-x = LVPoolRun(LVpool, 0)
+x = []
 for i in range(1,n_runs):
-	x = x + LVPoolRun(LVpool,i)
+	x.append(dask.delayed(LVPoolRun)(LVpool,i))
 	print("LV Pool Iteration %i of %i" % (i+1,n_runs))
 
-x.compute()
+dask.compute(x)
 os.chdir(workingdir) #MJ
 numpy.savetxt('PoolPrey.csv',PoolPrey,delimiter=',',header="",comments='')
 numpy.savetxt('PoolPredator.csv',PoolPredator,delimiter=',',header="",comments='')
@@ -88,7 +87,7 @@ QueueExtinction = numpy.empty([n_runs,3])
 QueueMedian = numpy.empty([n_runs,3])
 QueueMean = numpy.empty([n_runs,3])
 
-@delayed # Add decorator to any function definition
+
 def LVQueueRun(model,iteration):
     model.Endtime(end_time)
     model.DoStochSim()
