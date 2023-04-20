@@ -56,9 +56,9 @@ def Simulation(t, Prey, Predator) -> None:
     #print(t, Prey, Predator)
 
 start = time.time()
-for i in range(100000):
+for i in range(1000000):
     Simulation(0, prey, predator)
-    print("Simulation %i of %i complete" % (i+1, 100000))
+    print("Simulation %i of %i complete" % (i+1, 1000000))
 end = time.time()
 print(end - start)
 

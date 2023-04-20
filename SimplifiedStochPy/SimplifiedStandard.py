@@ -4,15 +4,15 @@ import dask
 import time
 
 # Parameter Values
-prey = 60
-predator = 30
+prey = 6
+predator = 3
 alpha = 10
 gamma = 1
 mu = 1
 beta = 0.45
 delta = 0.1
-K_prey = 100
-K_predator = 150
+K_prey = 10
+K_predator = 15
 end_time = 100
 
 def Simulation(t, Prey, Predator) -> None:
@@ -55,9 +55,9 @@ def Simulation(t, Prey, Predator) -> None:
     #print(t, Prey, Predator)
 
 start = time.time()
-for i in range(1000000):
+for i in range(100000):
     Simulation(0, prey, predator)
-    print("Simulation %i of %i complete" % (i+1, 1000000))
+    print("Simulation %i of %i complete" % (i+1, 100000))
 end = time.time()
 print(end - start)
 
