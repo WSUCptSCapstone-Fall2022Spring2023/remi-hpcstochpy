@@ -36,12 +36,12 @@ R5:
     predator*mu*(1-(predator/K_predator))
 
 # Parameter Values
-prey = 6
-predator = 3
+prey = 60
+predator = 30
 alpha = 10.0
 gamma = 1.0
 mu = 1.0
 beta = 0.45
 delta = 0.10
-K_prey = 10
-K_predator = 15
+K_prey = 100
+K_predator = 150
