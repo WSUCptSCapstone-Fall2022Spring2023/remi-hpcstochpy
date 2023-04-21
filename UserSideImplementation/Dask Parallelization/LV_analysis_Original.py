@@ -14,7 +14,7 @@ workingdir = os.getcwd()
 # General simulation parameters
 start_time = 0.0
 end_time = 100
-n_runs = 2500
+n_runs = 1000000
 
 ######################################
 # Pool-based Birth/Death of Predator #

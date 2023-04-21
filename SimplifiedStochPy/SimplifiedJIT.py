@@ -15,7 +15,7 @@ K_prey = 10
 K_predator = 15
 end_time = 100
 
-
+@njit
 def Simulation(t, Prey, Predator) -> None:
     #simulation
     while t < end_time:
@@ -56,9 +56,9 @@ def Simulation(t, Prey, Predator) -> None:
     #print(t, Prey, Predator)
 
 start = time.time()
-for i in range(1000000):
-    Simulation(0, 6, 3)
-    print("Simulation %i complete" % (i+1))
+for i in range(100000):
+    Simulation(0, prey, predator)
+    print("Simulation %i of %i complete" % (i+1, 100000))
 end = time.time()
 print(end - start)
 
