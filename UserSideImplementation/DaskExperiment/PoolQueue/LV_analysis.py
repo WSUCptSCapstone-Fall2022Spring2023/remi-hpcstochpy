@@ -15,7 +15,7 @@ workingdir = r"C:\Users\McNaughton\Desktop\423GitRepo\remi-hpcstochpy\UserSideIm
 # General simulation parameters
 start_time = 0.0
 end_time = 100
-n_runs = 1000
+n_runs = 2500
 
 ######################################
 # Pool-based Birth/Death of Predator #
