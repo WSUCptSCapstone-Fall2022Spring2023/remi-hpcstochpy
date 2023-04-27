@@ -1,15 +1,18 @@
-# Sprint 6 Report (3/3/2023 - 4/2/2023)
+# Sprint 7 Report (4/3/2023 - 5/2/2023)
 
 ## What's New
- * Completed a Numba stochastic simulation implementation
- * Concluded unfeasibility of Dask implementation
- * Touched base with Dr. Lofgren about project progress, future planning 
+ * Developed Numba compatible stochastic simulation implementation for poster presentation
+ * Confirmed potential for further development in Python if desired
+ * Investigated potential alternatives and necessary accommodations in Julia
+ * Prepared and presented poster on project
+ * Touched base with Dr. Lofgren about moving to Julia
+ * Finalized MVP Report
 
 ## Work Summary
-For Sprint 6, aside from keeping our documentation up-to-date, we have generally reached a conclusion on the state of a Numba implementation for StochPy and a Dask implementation for StochPy. For Numba, while we have completed implementing Numba functionality into StochPy, specifically the parts relating to stochastic simulation functionality, the overall runtime has increased by a factor of three, owing to incompatibilities (one of which being that Numba lacks a key random seed feature used by StochPy) in the StochPy forcing Numba to run in a less-efficient mode. We have concluded that attempting to get Numba to fully work with StochPy is not possible, especially considering the remaining time in this semester and the sheer difficulty of working within the StochPy codebase. Additionally, we have found that Dask is also not practical for a StochPy rewrite either, since it also has some incompatibilities with how StochPy performs its simulations. Our client, Dr. Lofgren, has been notified of this, and accepts our results for this foray into parallelizing StochPy, and has also directed us to pursue other alternatives with our remaining time. As such, our team has begun the process of creating a rewrite of StochPy limited solely to the stochastic simulation functionality, and some limited simulation files have already been created for this.
+For Sprint 7, we succesfully developed a prototype to demonstrate the benefits of Numba and Dask for use with Stochastic Simulations in Python. We prepared a poster presentation to display and explain the benefits of and research behind this prototype and gave our conclusions on the viability of replacing StochPy with a more modern implementation of the library making use of these modern tools. We also investigated potentially shifting the language of future tools for the client to Julia, looking into replacements for StochPy as well as the necessary tools to accommodate such a shift.
 
 ## Unfinished Work
-Unfinished work includes preparing our poster presentations for the demo day, along with preparing all associated documentation and materials for final submissions and transfer to Dr. Lofgren. In addition, there are more additions that can be made to our limited rewrite of StochPy. 
+While no work remains unfinished in terms of out goals and objectives, there is much room for further development and improvement upon the existing research and prototype should the client choose to continue investigating optimization of their stochastim simulation techniques.
 
 ## Completed Issues
 Here are links to the issues that we completed in this sprint:
@@ -26,7 +29,7 @@ Here are links to the issues that we completed in this sprint:
 * [Perform speedup analysis after Numba/Dask optimization](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/40)
 
  ## Incomplete Issues
-No issues pertaining to Sprint 6 remain incomplete. All that remains are the aforementioned presentation materials, documentation, and other miscellanea. 
+No issues pertaining to Sprint 7 remain incomplete. 
 
 ## Code Files for Review
 * [Completed Numba Implementation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/compare/main...numba-testing)
@@ -34,8 +37,8 @@ No issues pertaining to Sprint 6 remain incomplete. All that remains are the afo
  
 ## Retrospective Summary
 Here's what went well:
-  * Acquiring a better understanding of the technologies we are using (Dask, Numba)
-  * Acquiring a better understanding of StochPy
+  * Acquiring a better understanding of the technologies we are using (Dask, Numba, Julia)
+  * Acquiring a better understanding of StochPy and stochastic simulation as a whole
   * Communicating our work and efforts to our client
  
 Here's what we'd like to improve:
