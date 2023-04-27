@@ -1,0 +1,71 @@
+Defaults to not using seed, could be removed?
+does a bunch of annoying nonsense with the directory it is working in, this is cause of location issue
+Allows user to set model file and directory to output, is used by client
+Allows user to set endtime, used by client
+allows user to change parameters, used by client
+many unused elements
+
+DoStochSim : 653 of StochSim
+many many checks on traits not used
+saves data and datagrid at 706/707
+	need SSA.parse : 33 in StochPyTools
+	need SSASettings : 45
+	need SSA.execute : 56 in DirectMethod
+	need FillDataStochSim : 1892
+	need Analysis.DoPlotting : 409 in Analysis
+Calls to other things which do the actual simulation
+
+GetRegularGrid : 1083 of StochSim
+	need IntigrationStochasticDataObject from PyscesMiniModel
+	needs np.linspace
+complex and messy array manupulation to provide output
+
+Model : 309 of StochSim
+sets the file and output directory for the SSA model
+
+Endtime : 261 of StochSim
+sets end time for SSA model and swaps mode to time rather than steps
+
+ChangeParameter : 386 of StochSim
+sets specified parameter to specified value
+
+SSASettings : 45 of StochSim
+holds setting information
+
+Execute : 56 of DirectMethod
+does a lot of messy setup work
+calls the simulation for the step
+does messy output work
+repeats in loop for whole simulation
+	needs RunExactTimestep : 131
+
+RunExactTimestep : 131 of DirectMethod
+runs a simulation step, very messy, more complex than is needed for redo
+	needs several sim...etc elements from StochPyTools
+
+Parse : 33 in StochPyTools
+	needs PySCeS_Connector from PyscesMiniModel
+does more annoying name and directory changes
+uses a lot of Numba incompatible operations with no easy replacement
+
+Pycses parser full of Numba incompatability, reformatting input seems inevitable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
