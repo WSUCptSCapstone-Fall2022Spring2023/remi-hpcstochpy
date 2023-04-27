@@ -33,8 +33,7 @@ Here are links to the issues that we completed in this sprint:
 No issues pertaining to Sprint 7 remain incomplete. 
 
 ## Code Files for Review
-* [Completed Numba Implementation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/compare/main...numba-testing)
-* [Experimental Work on New Library](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/pull/114/files)
+* [Prototype prepped for demo](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/pull/123)
  
 ## Retrospective Summary
 Here's what went well:
