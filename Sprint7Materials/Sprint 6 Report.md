@@ -16,17 +16,18 @@ While no work remains unfinished in terms of out goals and objectives, there is 
 
 ## Completed Issues
 Here are links to the issues that we completed in this sprint:
-* [3/9/23 Client Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/78)
-* [3/21/23 Mentor Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/79)
-* [3/30/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/82)
-* [3/9/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/77)
-* [3/23/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/80)
-* [3/31/23 Client Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/81)
-* [Prepare and submit the third draft of the MVP Project Report](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/94)
-* [Prepare and submit Sprint 6 Report Materials](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/97)
-* [Use Numba to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/44)
-* [Use Dask to optimize StochPy doStochSim](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/39)
-* [Perform speedup analysis after Numba/Dask optimization](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/40)
+* [4/6/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/83)
+* [4/6/23 Client Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/84)
+* [4/11/23 Mentor Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/86)
+* [Premare and Submit Poster Title and Abstract](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/85)
+* [4/13/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/87)
+* [4/20/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/89)
+* [4/20/23 Client Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/90)
+* [Poster Presentation](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/88)
+* [4/27/23 Team Meeting](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/91)
+* [Client MVP Demo](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/92)
+* [Prepare and submit the final draft of the MVP Project Report](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/95)
+* [Prepare and submit Sprint 7 Report Materials](https://github.com/WSUCptSCapstone-Fall2022Spring2023/remi-hpcstochpy/issues/98)
 
  ## Incomplete Issues
 No issues pertaining to Sprint 7 remain incomplete. 
