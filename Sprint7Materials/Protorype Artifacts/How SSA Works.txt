@@ -1,0 +1,26 @@
+Given list of reactions with probabilities calculated from density values
+Calculate how long you wait for a thing to happen
+Determine which thing happened
+update the timestamp UNEVEN TIMESTAMP SPACINGS
+update values
+repeat cycle
+
+Example:
+Species X
+Growth rate of X = 6
+Decay rate of X = 0.3*X
+
+Event: X + 1 
+Rate: 6
+Event: X - 1 
+Rate: 0.3X
+
+Take sum of rates
+
+tau = random selection from exponential distribution of 1/sum of rates
+
+at tau, select event from list randomly based on probabilities
+run the event
+
+repeat loop until tau >= endtime
+
